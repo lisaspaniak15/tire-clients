@@ -3,54 +3,359 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Client Portal — Truth in Real Estate</title>
+  <title>Seller & Buyer Portal — Truth in Real Estate®</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet" />
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: #0f1117;
-      color: #ffffff;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 2rem;
+    :root {
+      --navy:   #14213d;
+      --cream:  #faf9f6;
+      --teal:   #7a928d;
+      --gold:   #d4b07a;
+      --altbg:  #f3f8fb;
+      --white:  #ffffff;
     }
-    .logo { font-size: 0.85rem; letter-spacing: 0.2em; text-transform: uppercase; color: #a0a0b0; margin-bottom: 2rem; }
-    .tag {
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--navy); }
+
+    nav {
+      background: var(--white);
+      border-bottom: 1px solid #e8e2d9;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-brand {
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--navy);
+      text-decoration: none;
+    }
+    .nav-brand span { color: var(--gold); }
+    .nav-back {
+      font-size: 0.85rem;
+      color: var(--teal);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .nav-back:hover { color: var(--navy); }
+
+    .hero {
+      background: var(--navy);
+      color: var(--white);
+      text-align: center;
+      padding: 5rem 2rem 4rem;
+    }
+    .hero-label {
       display: inline-block;
-      background: #1a1f2e;
-      border: 1px solid #2a3050;
-      color: #c9a84c;
+      background: rgba(212,176,122,0.15);
+      border: 1px solid var(--gold);
+      color: var(--gold);
       font-size: 0.75rem;
+      font-weight: 600;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      padding: 0.4rem 1rem;
+      padding: 0.4rem 1.1rem;
       border-radius: 100px;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.75rem;
     }
-    h1 { font-size: 2.5rem; font-weight: 700; line-height: 1.2; margin-bottom: 1.5rem; }
-    p { font-size: 1.05rem; color: #a0a0b0; max-width: 440px; line-height: 1.7; margin-bottom: 3rem; }
-    .coming-soon {
-      margin-top: 2rem;
+    .hero h1 {
+      font-size: clamp(2rem, 4.5vw, 3rem);
+      font-weight: 900;
+      line-height: 1.15;
+      max-width: 640px;
+      margin: 0 auto 1.5rem;
+    }
+    .hero h1 em { color: var(--gold); font-style: normal; }
+    .hero p {
+      font-size: 1.1rem;
+      color: #b8c5d0;
+      max-width: 520px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+    }
+    .hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem; }
+    .btn-gold {
+      background: var(--gold);
+      color: var(--navy);
+      padding: 0.85rem 2rem;
+      border-radius: 7px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: opacity 0.2s;
+    }
+    .btn-gold:hover { opacity: 0.88; }
+    .coming-soon-pill {
+      display: inline-block;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: #b8c5d0;
       font-size: 0.8rem;
-      color: #444;
       letter-spacing: 0.1em;
       text-transform: uppercase;
+      padding: 0.5rem 1.2rem;
+      border-radius: 100px;
     }
-    .back { margin-top: 3rem; }
-    .back a { color: #a0a0b0; font-size: 0.85rem; text-decoration: none; }
-    .back a:hover { color: #fff; }
+
+    section { padding: 4rem 2rem; }
+    .container { max-width: 900px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 0.6rem;
+    }
+    .section-heading {
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .section-sub {
+      font-size: 1rem;
+      color: var(--teal);
+      line-height: 1.7;
+      max-width: 560px;
+    }
+
+    /* WHY IT MATTERS */
+    .why { background: var(--white); }
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .why-card {
+      border: 1px solid #e8e2d9;
+      border-radius: 10px;
+      padding: 1.75rem;
+      background: var(--cream);
+    }
+    .why-card-icon { font-size: 1.4rem; margin-bottom: 0.75rem; }
+    .why-card h3 { font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 0.5rem; }
+    .why-card p { font-size: 0.9rem; color: var(--teal); line-height: 1.65; }
+
+    /* WHAT YOU GET */
+    .what-you-get { background: var(--altbg); }
+    .get-list {
+      margin-top: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .get-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      background: var(--white);
+      border: 1px solid #e8e2d9;
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+    }
+    .get-icon {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      background: var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--navy);
+    }
+    .get-item h4 { font-size: 0.95rem; font-weight: 700; color: var(--navy); margin-bottom: 0.25rem; }
+    .get-item p { font-size: 0.88rem; color: var(--teal); line-height: 1.55; }
+
+    /* TESTIMONIALS */
+    .testimonials { background: var(--navy); color: var(--white); }
+    .testimonials .section-heading { color: var(--white); }
+    .testimonials .section-sub { color: #b8c5d0; }
+    .testimonials .section-label { color: var(--gold); }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 1.75rem;
+    }
+    .card p { font-size: 0.95rem; line-height: 1.7; color: #d8e2ea; margin-bottom: 1.25rem; }
+    .card-name { font-size: 0.85rem; font-weight: 700; color: var(--gold); }
+
+    /* CTA */
+    .cta-banner {
+      background: var(--gold);
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+    .cta-banner h2 {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 900;
+      color: var(--navy);
+      margin-bottom: 0.75rem;
+    }
+    .cta-banner p { font-size: 0.95rem; color: #4a3620; margin-bottom: 2rem; line-height: 1.6; }
+    .btn-dark {
+      background: var(--navy);
+      color: var(--white);
+      padding: 0.9rem 2.2rem;
+      border-radius: 7px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+      display: inline-block;
+      transition: opacity 0.2s;
+    }
+    .btn-dark:hover { opacity: 0.85; }
+
+    footer {
+      background: var(--navy);
+      color: #8a9ab0;
+      text-align: center;
+      padding: 2.5rem 2rem;
+      font-size: 0.85rem;
+      line-height: 1.8;
+    }
+    footer a { color: var(--gold); text-decoration: none; }
+    footer strong { color: var(--white); }
   </style>
 </head>
 <body>
-  <div class="logo">Truth in Real Estate</div>
-  <div class="tag">Seller &amp; Buyer Portal</div>
-  <h1>Find an agent you can actually trust.</h1>
-  <p>This is where sellers and buyers will log in to view their matched agent, track their referral, and access their concierge support.</p>
-  <div class="coming-soon">Seller &amp; buyer login portal — coming soon</div>
-  <div class="back"><a href="https://tire-main.fly.dev">&larr; Back to main site</a></div>
+
+  <nav>
+    <a class="nav-brand" href="https://tire-main.fly.dev">Truth in Real Estate<span>®</span></a>
+    <a class="nav-back" href="https://tire-main.fly.dev">&larr; Back to main site</a>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-label">Seller &amp; Buyer Portal</div>
+    <h1>Find an agent you can <em>actually trust.</em></h1>
+    <p>This is where sellers and buyers will log in to view their matched agent, track their referral, and access concierge support from Kati's team.</p>
+    <div class="hero-buttons">
+      <a class="btn-gold" href="form.html">Get Matched Now — It's Free</a>
+    </div>
+    <div class="coming-soon-pill">Seller &amp; buyer login portal — coming soon</div>
+  </div>
+
+  <section class="why">
+    <div class="container">
+      <div class="section-label">Why It Matters</div>
+      <h2 class="section-heading">Choosing the wrong agent is the biggest mistake you can make</h2>
+      <p class="section-sub">Kati has seen homeowners lose tens — even hundreds — of thousands of dollars because of the agent they chose. That's why this service exists.</p>
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="why-card-icon">💰</div>
+          <h3>You'll Make More Money</h3>
+          <p>TruthCertified™ agents are proven negotiators. They'll protect your equity and help you get the best possible price.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-card-icon">⏱️</div>
+          <h3>Sell Faster, Stress-Free</h3>
+          <p>With the right agent, you'll limit unnecessary showings and be priced correctly from day one — no drawn-out listings.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-card-icon">🧭</div>
+          <h3>A Real Plan</h3>
+          <p>No guessing. No fluff. You'll have an exact plan to follow — from prepping your home to closing day.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-card-icon">🫶</div>
+          <h3>Ongoing Support from Kati</h3>
+          <p>Kati and her team don't disappear after the intro. They're with you until you close, available whenever you need them.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="what-you-get">
+    <div class="container">
+      <div class="section-label">What You Get</div>
+      <h2 class="section-heading">What your portal will include</h2>
+      <p class="section-sub">Once your login is active, here's everything you'll be able to access in one place.</p>
+      <div class="get-list">
+        <div class="get-item">
+          <div class="get-icon">✓</div>
+          <div>
+            <h4>Your Matched Agent Profile</h4>
+            <p>View the agent Kati's team selected for you — their experience, brokerage, specialties, and contact info.</p>
+          </div>
+        </div>
+        <div class="get-item">
+          <div class="get-icon">✓</div>
+          <div>
+            <h4>Referral Status Tracker</h4>
+            <p>See exactly where you are in the process — from intro to interviews to choosing your agent.</p>
+          </div>
+        </div>
+        <div class="get-item">
+          <div class="get-icon">✓</div>
+          <div>
+            <h4>Direct Line to Kati's Team</h4>
+            <p>Message the team anytime with questions. You're never left wondering what's happening next.</p>
+          </div>
+        </div>
+        <div class="get-item">
+          <div class="get-icon">✓</div>
+          <div>
+            <h4>Resources & Guides</h4>
+            <p>Access Kati's seller and buyer guides, checklists, and advice — all in one place when you need it.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonials">
+    <div class="container">
+      <div class="section-label">Real Results</div>
+      <h2 class="section-heading">What sellers & buyers say</h2>
+      <p class="section-sub">These are real people who trusted Kati's referral service — and got results.</p>
+      <div class="cards">
+        <div class="card">
+          <p>"We listed Thursday, had 4 showings and an open house, multiple offers — and we are officially under contract at full price with no contingencies. To say we are thrilled would be an understatement."</p>
+          <div class="card-name">— Mary</div>
+        </div>
+        <div class="card">
+          <p>"After a year of following your advice, Kati, and getting referred to the perfect agent team… we did it. We sold our home and it couldn't have gone better."</p>
+          <div class="card-name">— Meg</div>
+        </div>
+        <div class="card">
+          <p>"You referred my husband and I to our agent. We met today and loved her! Very professional, educated, personable, and detailed. We cannot wait to get started."</p>
+          <div class="card-name">— Donna</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-banner">
+    <h2>Ready to get matched with your agent?</h2>
+    <p>Fill out Kati's intake form — it's free, there's no obligation, and the referral service costs you nothing.</p>
+    <a class="btn-dark" href="form.html">Get Matched with a TruthCertified™ Agent</a>
+  </div>
+
+  <footer>
+    <strong>Truth in Real Estate®</strong> &mdash; Kati Spaniak<br />
+    Licensed Real Estate Broker in Illinois &amp; Florida &mdash; eXp Realty<br />
+    847.713.1556 &nbsp;|&nbsp; <a href="https://katispaniak.com">KatiSpaniak.com</a><br /><br />
+    <a href="https://tire-main.fly.dev">Main Site</a> &nbsp;&middot;&nbsp;
+    <a href="https://tire-agents.fly.dev">Agent Portal</a><br /><br />
+    &copy; 2026 Kati Spaniak &mdash; Truth in Real Estate®
+  </footer>
+
 </body>
 </html>
