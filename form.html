@@ -347,8 +347,8 @@
             <input type="tel" id="phone" name="phone" placeholder="(555) 000-0000" />
           </div>
         </div>
-        <div class="field-row single" style="margin-bottom:0.25rem;">
-          <p style="font-size:0.82rem;font-weight:700;color:var(--navy);">Current Address <span style="font-weight:400;color:var(--teal);">(where you live. If the home you are selling is a different address, you will enter that below)</span></p>
+        <div class="field-row single" style="margin-bottom:1rem;">
+          <p style="font-size:0.82rem;font-weight:700;color:var(--navy);">Current Address <span style="font-weight:400;color:var(--teal);">(where you live, not necessarily the home you are selling)</span></p>
         </div>
         <div class="field-row single">
           <div class="field">
@@ -546,12 +546,12 @@
         </div>
       </div>
 
-      <!-- ABOUT YOU (always shown) -->
-      <div class="form-section">
+      <!-- ABOUT YOU -->
+      <div class="form-section conditional-section" id="about-you-section">
         <div class="form-section-title">About You</div>
         <div class="field-row single" style="margin-bottom:1.25rem;">
           <div class="field">
-            <label>What qualities matter most in an agent? <span class="optional">(select all that apply)</span></label>
+            <label>What qualities matter most in an agent? (select up to three)</label>
             <div class="checkbox-grid">
               <label class="checkbox-item"><input type="checkbox" name="agent_qualities" value="Strong negotiator" /> Strong negotiator</label>
               <label class="checkbox-item"><input type="checkbox" name="agent_qualities" value="Great communicator" /> Great communicator</label>
@@ -566,7 +566,7 @@
         </div>
         <div class="field-row single" style="margin-bottom:1.25rem;">
           <div class="field">
-            <label>How much guidance do you want from your agent?</label>
+            <label>How much hand-holding do you need from your agent?</label>
             <div class="scale-row">
               <div><input class="scale-option" type="radio" name="hand_holding" id="hh1" value="1" /><label class="scale-label" for="hh1"><span class="scale-num">1</span></label></div>
               <div><input class="scale-option" type="radio" name="hand_holding" id="hh2" value="2" /><label class="scale-label" for="hh2"><span class="scale-num">2</span></label></div>
@@ -581,24 +581,41 @@
             </div>
             <div class="scale-end-labels">
               <span>Hands-off</span>
-              <span>Full guidance</span>
+              <span>Very hands-on</span>
             </div>
-          </div>
-        </div>
-        <div class="field-row">
-          <div class="field">
-            <label for="best_time_to_reach">Best time to reach you</label>
-            <input type="text" id="best_time_to_reach" name="best_time_to_reach" placeholder="e.g. Weekday mornings" />
-          </div>
-          <div class="field">
-            <label for="agents_required">How many agents would you like to interview?</label>
-            <input type="number" id="agents_required" name="agents_required" placeholder="e.g. 2" min="1" max="10" />
           </div>
         </div>
         <div class="field-row single">
           <div class="field">
-            <label for="dnr">Any agents you've already spoken with that we should avoid?</label>
-            <input type="text" id="dnr" name="dnr" placeholder="Agent names or brokerages to skip" />
+            <label for="best_time_to_reach">Best time to reach you</label>
+            <input type="text" id="best_time_to_reach" name="best_time_to_reach" placeholder="e.g. Weekday mornings" />
+          </div>
+        </div>
+        <div class="field-row single" id="agents-required-row" style="display:none">
+          <div class="field">
+            <label for="agents_required">How many seller's agents would you like us to refer you to?</label>
+            <p style="font-size:0.78rem;color:var(--teal);margin:-4px 0 8px;line-height:1.5;">Note: if your home is currently listed with an agent, we will refer one at a time to ensure we are finding you the best fit.</p>
+            <div class="agent-type-options" style="display:flex;flex-direction:row;gap:1.5rem;margin-top:0.25rem;">
+              <div>
+                <input class="agent-type-option" type="radio" name="agents_required" id="ar-1" value="1" />
+                <label class="agent-type-label" for="ar-1" style="flex:0 0 auto;padding:0.6rem 1.4rem;">
+                  <span class="at-title">1</span>
+                </label>
+              </div>
+              <div>
+                <input class="agent-type-option" type="radio" name="agents_required" id="ar-2" value="2" />
+                <label class="agent-type-label" for="ar-2" style="flex:0 0 auto;padding:0.6rem 1.4rem;">
+                  <span class="at-title">2</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="field-row single">
+          <div class="field">
+            <label for="dnr">Who have you already spoken with or met AND is there an agent in your community you do NOT want us to refer you to?</label>
+            <p style="font-size:0.78rem;color:var(--teal);margin:-4px 0 8px;line-height:1.5;">(Please fill this question out thoroughly as we do not want to double refer you) We will not refer anyone you have spoken with already or anyone you have asked us not to refer.</p>
+            <input type="text" id="dnr" name="dnr" placeholder="Agent names to not refer" />
           </div>
         </div>
         <div class="field-row single">
@@ -609,7 +626,7 @@
         </div>
       </div>
 
-      <div class="submit-row">
+      <div class="submit-row conditional-section" id="submit-row">
         <button type="submit" class="btn-submit" id="submit-btn">Submit My Request</button>
         <p class="submit-note">Free &middot; No obligation &middot; Kati's team will follow up within 1 business day</p>
       </div>
@@ -661,9 +678,27 @@
       }
     })
 
+    // Limit agent qualities to 3 selections
+    document.querySelectorAll('input[name="agent_qualities"]').forEach(cb => {
+      cb.addEventListener('change', () => {
+        const checked = document.querySelectorAll('input[name="agent_qualities"]:checked')
+        document.querySelectorAll('input[name="agent_qualities"]').forEach(c => {
+          if (!c.checked) c.disabled = checked.length >= 3
+        })
+      })
+    })
+
     // Show/hide listing agreement expiry field
     document.getElementById('listing_agreement_signed').addEventListener('change', function () {
       document.getElementById('expiry-section').style.display = this.value === 'yes' ? 'block' : 'none'
+      if (this.value === 'yes') {
+        document.getElementById('ar-1').checked = true
+        document.getElementById('ar-2').disabled = true
+        document.getElementById('ar-2').closest('div').style.opacity = '0.4'
+      } else {
+        document.getElementById('ar-2').disabled = false
+        document.getElementById('ar-2').closest('div').style.opacity = '1'
+      }
     })
 
     // Show/hide seller and buyer sections based on agent type selection
@@ -679,6 +714,9 @@
         buyerSection.style.display  = (val === 'buyers_agent_only'  || val === 'both') ? 'block' : 'none'
         sameLocationSection.style.display = (val === 'both') ? 'block' : 'none'
         document.getElementById('moving-to-row').style.display = (val === 'both') ? 'none' : 'block'
+        document.getElementById('agents-required-row').style.display = (val === 'sellers_agent_only' || val === 'both') ? 'block' : 'none'
+        document.getElementById('about-you-section').style.display = 'block'
+        document.getElementById('submit-row').style.display = 'block'
       })
     })
 
@@ -780,7 +818,19 @@
         if (scaleRow) scaleRow.style.outline = ''
       }
 
-      need('best_time_to_reach'); need('agents_required'); need('dnr'); need('current_situation')
+      need('best_time_to_reach'); need('dnr'); need('current_situation')
+      if (agentType === 'sellers_agent_only' || agentType === 'both') {
+        const agentsChecked = document.querySelector('input[name="agents_required"]:checked')
+        if (!agentsChecked) {
+          const agentsRow = document.getElementById('agents-required-row')
+          agentsRow.style.outline = '2px solid #e74c3c'
+          agentsRow.style.borderRadius = '6px'
+          valid = false
+          if (!firstInvalidEl) firstInvalidEl = agentsRow
+        } else {
+          document.getElementById('agents-required-row').style.outline = ''
+        }
+      }
 
       if (!valid) {
         errorMsg.textContent = 'Please fill in all required fields (highlighted in red).'
@@ -803,9 +853,9 @@
         const handHoldingEl   = form.elements['hand_holding']
 
         const payload = {
-          firstname,
-          lastname,
-          email,
+          firstname:                            form.firstname.value.trim(),
+          lastname:                             form.lastname.value.trim(),
+          email:                                form.email.value.trim(),
           phone:                              form.phone.value.trim() || null,
           current_street:                     form.current_street.value.trim() || null,
           current_city:                       form.current_city.value.trim() || null,
@@ -839,7 +889,7 @@
           agent_qualities:                    qualities,
           hand_holding:                       handHoldingEl && handHoldingEl.value ? parseInt(handHoldingEl.value) : null,
           best_time_to_reach:                 form.best_time_to_reach.value.trim() || null,
-          agents_required:                    form.agents_required.value ? parseInt(form.agents_required.value) : null,
+          agents_required:                    (() => { const c = document.querySelector('input[name="agents_required"]:checked'); return c ? parseInt(c.value) : null; })(),
           dnr:                                form.dnr.value.trim() || null,
           current_situation:                  form.current_situation.value.trim() || null,
         }
