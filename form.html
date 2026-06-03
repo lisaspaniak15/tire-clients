@@ -6,126 +6,80 @@
   <title>Get Matched with an Agent — Truth in Real Estate®</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --navy:  #14213d;
+      --navy: #14213d;
       --cream: #faf9f6;
-      --teal:  #7a928d;
-      --gold:  #d4b07a;
-      --altbg: #f3f8fb;
+      --teal: #7a928d;
+      --gold: #d4b07a;
       --white: #ffffff;
+      --border: #cde0ec;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--navy); }
+    html, body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--navy); }
 
-    nav {
-      background: var(--white);
-      border-bottom: 1px solid #e8e2d9;
-      padding: 1rem 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    /* ── Header ─────────────────────────────────────── */
+    .form-header {
+      text-align: center;
+      padding: 1.75rem 1.5rem 1rem;
+      border-bottom: 1px solid #eef0f2;
     }
-    .nav-brand {
+    .form-header img { width: 240px; margin-bottom: 1rem; display: block; margin-left: auto; margin-right: auto; mix-blend-mode: multiply; }
+    .form-header h1 { font-size: 1.6rem; font-weight: 500; color: var(--navy); font-family: 'Montserrat', sans-serif; }
+
+    /* ── Progress ────────────────────────────────────── */
+    .progress-bar {
+      display: flex;
+      gap: 4px;
+      padding: 1rem 1.5rem 0;
+    }
+    .progress-step {
+      flex: 1;
+      height: 4px;
+      border-radius: 2px;
+      background: #e8edf0;
+      transition: background 0.3s;
+    }
+    .progress-step.active { background: var(--navy); }
+    .progress-label {
+      font-size: 0.72rem;
+      color: var(--teal);
+      font-weight: 500;
+      padding: 0.4rem 1.5rem 0;
+      letter-spacing: 0.02em;
+    }
+
+    /* ── Steps ───────────────────────────────────────── */
+    .step { display: none; padding: 1.25rem 1.5rem 0; }
+    .step.active { display: block; }
+
+    .step-title {
       font-size: 0.95rem;
       font-weight: 700;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--navy);
-      text-decoration: none;
+      margin-bottom: 1.25rem;
+      margin-top: 1.5rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid #eef0f2;
+      font-family: 'Montserrat', sans-serif;
     }
-    .nav-brand span { color: var(--gold); }
-    .nav-back {
-      font-size: 0.85rem;
-      color: var(--teal);
-      text-decoration: none;
+    .step > .step-title:first-child { margin-top: 0; }
+
+    /* ── Fields ──────────────────────────────────────── */
+    .field { margin-bottom: 1.25rem; }
+    .field label {
+      display: block;
+      font-size: 0.88rem;
       font-weight: 500;
-    }
-    .nav-back:hover { color: var(--navy); }
-
-    .hero {
-      background: var(--navy);
-      color: var(--white);
-      text-align: center;
-      padding: 4rem 2rem 3rem;
-    }
-    .hero-label {
-      display: inline-block;
-      background: rgba(212,176,122,0.15);
-      border: 1px solid var(--gold);
-      color: var(--gold);
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      padding: 0.4rem 1.1rem;
-      border-radius: 100px;
-      margin-bottom: 1.5rem;
-    }
-    .hero h1 {
-      font-size: clamp(1.8rem, 4vw, 2.6rem);
-      font-weight: 900;
-      line-height: 1.15;
-      max-width: 600px;
-      margin: 0 auto 1rem;
-    }
-    .hero h1 em { color: var(--gold); font-style: normal; }
-    .hero p {
-      font-size: 1rem;
-      color: #b8c5d0;
-      max-width: 500px;
-      margin: 0 auto;
-      line-height: 1.7;
-    }
-
-    /* ── FORM WRAPPER ─────────────────────────────────────── */
-    .form-wrap {
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 3rem 2rem 5rem;
-    }
-
-    .form-section {
-      background: var(--white);
-      border: 1px solid #e8e2d9;
-      border-radius: 12px;
-      padding: 2rem 2rem 2rem;
-      margin-bottom: 1.5rem;
-    }
-    .form-section-title {
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--teal);
-      margin-bottom: 1.5rem;
-      padding-bottom: 0.75rem;
-      border-bottom: 1px solid #e8e2d9;
-    }
-
-    .field-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-      margin-bottom: 1rem;
-    }
-    .field-row.single { grid-template-columns: 1fr; }
-    .field-row.triple { grid-template-columns: 1fr 1fr 1fr; }
-    @media (max-width: 600px) {
-      .field-row, .field-row.triple { grid-template-columns: 1fr; }
-    }
-
-    .field { display: flex; flex-direction: column; gap: 0.35rem; }
-    label {
-      font-size: 0.82rem;
-      font-weight: 600;
       color: var(--navy);
+      margin-bottom: 0.4rem;
+      font-family: 'Montserrat', sans-serif;
+      letter-spacing: 0.01em;
     }
-    .field > label::after {
-      content: ' *';
-      color: #c84040;
-    }
+    .field label.optional::after { content: ' ·'; font-weight: 400; color: var(--teal); font-size: 0.9em; }
     input[type="text"],
     input[type="email"],
     input[type="tel"],
@@ -133,385 +87,273 @@
     select,
     textarea {
       width: 100%;
-      padding: 0.65rem 0.85rem;
-      border: 1px solid #d4cfc8;
-      border-radius: 7px;
+      padding: 0.75rem 1rem;
+      border: 1px solid #dde5ea;
+      border-radius: 4px;
       font-family: 'Inter', sans-serif;
       font-size: 0.9rem;
       color: var(--navy);
-      background: var(--cream);
+      background: var(--white);
       transition: border-color 0.15s;
       appearance: none;
     }
-    input:focus, select:focus, textarea:focus {
-      outline: none;
-      border-color: var(--teal);
-    }
-    textarea { resize: vertical; min-height: 90px; }
+    input:focus, select:focus, textarea:focus { outline: none; border-color: var(--teal); }
+    textarea { resize: vertical; min-height: 80px; }
     select {
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237a928d' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
-      background-position: right 0.85rem center;
+      background-position: right 0.9rem center;
       padding-right: 2.2rem;
       cursor: pointer;
     }
+    .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.75rem; }
 
-    /* Radio agent type */
-    .agent-type-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0.75rem;
-      margin-top: 0.25rem;
+    /* ── Agent type cards ────────────────────────────── */
+    .agent-type-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 0.5rem; margin-top: 0.5rem; }
+    .at-radio { display: none; }
+    .at-label {
+      display: flex; align-items: center; justify-content: center;
+      border: 1px solid #dde5ea; border-radius: 4px;
+      padding: 0.65rem 0.5rem; cursor: pointer; text-align: center;
+      transition: border-color 0.15s, background 0.15s, color 0.15s; background: var(--white);
     }
-    @media (max-width: 500px) { .agent-type-grid { grid-template-columns: 1fr; } }
-    .agent-type-option { display: none; }
-    .agent-type-label {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0.4rem;
-      border: 2px solid #d4cfc8;
-      border-radius: 10px;
-      padding: 1.25rem 1rem;
-      cursor: pointer;
-      text-align: center;
-      transition: border-color 0.15s, background 0.15s;
-      background: var(--cream);
-    }
-    .agent-type-option:checked + .agent-type-label {
-      border-color: var(--gold);
-      background: rgba(212,176,122,0.08);
-    }
-    .agent-type-label .at-icon { font-size: 1.5rem; }
-    .agent-type-label .at-title { font-size: 0.88rem; font-weight: 700; color: var(--navy); }
-    .agent-type-label .at-sub { font-size: 0.76rem; color: var(--teal); }
+    .at-radio:checked + .at-label { border-color: var(--navy); background: var(--navy); }
+    .at-radio:checked + .at-label .at-title { color: #fff; }
+    .at-icon { display: none; }
+    .at-title { font-size: 0.82rem; font-weight: 500; color: var(--navy); font-family: 'Montserrat', sans-serif; }
+    .at-sub { display: none; }
 
-    /* Checkboxes */
-    .checkbox-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 0.5rem;
-      margin-top: 0.25rem;
-    }
-    .checkbox-item {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      cursor: pointer;
-      font-size: 0.88rem;
-      color: var(--navy);
-    }
-    .checkbox-item input[type="checkbox"] {
-      width: 16px;
-      height: 16px;
-      accent-color: var(--gold);
-      cursor: pointer;
-      flex-shrink: 0;
-    }
+    /* ── Checkbox grid ───────────────────────────────── */
+    .checkbox-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 0.4rem; margin-top: 0.25rem; }
+    .cb-item { display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-size: 0.84rem; color: var(--navy); }
+    .cb-item input[type="checkbox"] { width: 15px; height: 15px; accent-color: var(--gold); cursor: pointer; flex-shrink: 0; }
 
-    /* Scale */
-    .scale-row {
-      display: grid;
-      grid-template-columns: repeat(10, 1fr);
-      gap: 0.4rem;
-      margin-top: 0.25rem;
-    }
-    @media (max-width: 540px) {
-      .scale-row { grid-template-columns: repeat(5, 1fr); }
-    }
-    .scale-option { display: none; }
+    /* ── Hand-holding scale ──────────────────────────── */
+    .scale-row { display: grid; grid-template-columns: repeat(10,1fr); gap: 0.3rem; margin-top: 0.25rem; }
+    .scale-radio { display: none; }
     .scale-label {
+      display: flex; align-items: center; justify-content: center;
+      border: 1px solid #dde5ea; border-radius: 4px; padding: 0.65rem 0;
+      cursor: pointer; background: var(--white); transition: border-color 0.15s, background 0.15s, color 0.15s;
+      width: 100%; text-align: center;
+    }
+    .scale-num { font-size: 0.82rem; font-weight: 500; color: var(--navy); font-family: 'Montserrat', sans-serif; display: block; width: 100%; text-align: center; }
+    .scale-radio:checked + .scale-label { border-color: var(--navy); background: var(--navy); }
+    .scale-radio:checked + .scale-label .scale-num { color: #fff; }
+    .scale-ends { display: flex; justify-content: space-between; margin-top: 0.3rem; font-size: 0.7rem; color: var(--teal); font-weight: 500; }
+
+    /* ── Nav buttons ─────────────────────────────────── */
+    .step-nav {
+      background: var(--navy);
       display: flex;
       align-items: center;
-      justify-content: center;
-      border: 2px solid #d4cfc8;
-      border-radius: 8px;
-      padding: 0.65rem 0.25rem;
-      cursor: pointer;
-      background: var(--cream);
-      transition: border-color 0.15s, background 0.15s;
-      text-align: center;
-      width: 100%;
-    }
-    .scale-label .scale-num { font-size: 1rem; font-weight: 700; color: var(--navy); }
-    .scale-option:checked + .scale-label {
-      border-color: var(--gold);
-      background: rgba(212,176,122,0.15);
-    }
-    .scale-end-labels {
-      display: flex;
       justify-content: space-between;
-      margin-top: 0.4rem;
-      font-size: 0.75rem;
-      color: var(--teal);
-      font-weight: 500;
+      padding: 1rem 1.5rem;
+      margin-top: 1.25rem;
+      border-radius: 0 0 4px 4px;
     }
-
-    /* Hidden sections */
-    .conditional-section { display: none; }
-
-    /* Submit */
-    .submit-row {
-      text-align: center;
-      margin-top: 2rem;
+    /* White space below nav bar matches header top padding */
+    .step { padding-bottom: 1.75rem; }
+    .btn-back {
+      background: transparent; border: none; color: #fff;
+      font-family: 'Montserrat', sans-serif; font-size: 1.1rem; font-weight: 700;
+      cursor: pointer; padding: 0; letter-spacing: 0.04em; transition: opacity 0.15s; text-transform: uppercase;
     }
-    .btn-submit {
-      background: var(--gold);
-      color: var(--navy);
-      border: none;
-      padding: 1rem 3rem;
-      border-radius: 8px;
-      font-family: 'Inter', sans-serif;
-      font-size: 1rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: opacity 0.2s;
+    .btn-back:hover { opacity: 0.8; }
+    .btn-next, .btn-submit {
+      background: transparent; border: none; color: #fff;
+      font-family: 'Montserrat', sans-serif; font-size: 1.1rem; font-weight: 700;
+      cursor: pointer; padding: 0; letter-spacing: 0.04em; transition: opacity 0.15s;
     }
-    .btn-submit:hover { opacity: 0.88; }
+    .btn-next:hover, .btn-submit:hover { opacity: 0.8; }
     .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; }
-    .submit-note {
-      font-size: 0.8rem;
-      color: var(--teal);
-      margin-top: 0.75rem;
-    }
 
-    /* Success / Error */
-    .result-box {
-      display: none;
-      border-radius: 10px;
-      padding: 2rem;
-      text-align: center;
-      margin-top: 2rem;
-    }
-    .result-box.success {
-      background: rgba(122,146,141,0.1);
-      border: 1px solid var(--teal);
-    }
-    .result-box.error {
-      background: rgba(200,60,60,0.07);
-      border: 1px solid #c84040;
-    }
-    .result-box h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
-    .result-box p { font-size: 0.9rem; color: var(--teal); line-height: 1.6; }
+    /* ── Success / Error ─────────────────────────────── */
+    .result-box { display: none; padding: 2rem 1.5rem; text-align: center; }
+    .result-box.success { background: rgba(122,146,141,0.08); }
+    .result-box.error { background: rgba(200,60,60,0.06); }
+    .result-box h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+    .result-box p { font-size: 0.85rem; color: var(--teal); line-height: 1.6; }
     .result-box.error p { color: #c84040; }
 
-    footer {
-      background: var(--navy);
-      color: #8a9ab0;
-      text-align: center;
-      padding: 2.5rem 2rem;
-      font-size: 0.85rem;
-      line-height: 1.8;
+    /* ── Consent + links ─────────────────────────────── */
+    .consent-text {
+      font-size: 0.75rem; color: #666; line-height: 1.55;
+      padding: 0.9rem 1.5rem 0;
     }
-    footer a { color: var(--gold); text-decoration: none; }
-    footer strong { color: var(--white); }
+    .privacy-links {
+      text-align: center; padding: 0.75rem 1.5rem 1.25rem;
+      font-size: 0.78rem;
+    }
+    .privacy-links a { color: var(--teal); text-decoration: none; }
+    .privacy-links a:hover { text-decoration: underline; }
+
+    /* ── Terms & Conditions ──────────────────────────── */
+    .tc-label {
+      display: flex !important;
+      align-items: flex-start;
+      gap: 0.6rem;
+      font-size: 0.75rem;
+      font-weight: 400 !important;
+      color: var(--navy);
+      font-family: 'Inter', sans-serif !important;
+      line-height: 1.55;
+      cursor: pointer;
+    }
+
+    /* Error highlight */
+    .field-error { border-color: #c84040 !important; }
+    .field-error-msg { font-size: 0.75rem; color: #c84040; margin-top: 0.25rem; }
   </style>
 </head>
 <body>
 
-  <nav>
-    <a class="nav-brand" href="index.html">Truth in Real Estate<span>®</span></a>
-    <a class="nav-back" href="index.html">&larr; Back</a>
-  </nav>
-
-  <div class="hero">
-    <div class="hero-label">Free Agent Matching</div>
-    <h1>Find an agent you can <em>actually trust.</em></h1>
-    <p>Fill out the form below — it takes about 3 minutes and there's no obligation. Kati's team will review your answers and find the right agent for you.</p>
+  <!-- Header -->
+  <div class="form-header">
+    <img src="https://images.leadconnectorhq.com/image/f_webp/q_85/r_1000/u_https://storage.googleapis.com/highlevel-backend.appspot.com/location/pCVBNr41M7SuYTzI2KHA/form/379mD4Gf6AzHa2utT3A4/667ef62b-79ae-4a74-97db-6bb2ef5fc12e.png" alt="Truth in Real Estate" />
+    <h1>Get a TruthCertified™ Agent!</h1>
   </div>
 
-  <div class="form-wrap">
-    <form id="referral-form" novalidate>
+  <!-- Progress -->
+  <div class="progress-bar">
+    <div class="progress-step active" id="prog-1"></div>
+    <div class="progress-step" id="prog-2"></div>
+    <div class="progress-step" id="prog-3"></div>
+    <div class="progress-step" id="prog-4"></div>
+  </div>
+  <p class="progress-label" id="progress-label">Step 1 of 4 — Your Info</p>
 
-      <!-- YOUR INFO -->
-      <div class="form-section">
-        <div class="form-section-title">Your Info</div>
-        <div class="field-row">
-          <div class="field">
-            <label for="firstname">First Name</label>
-            <input type="text" id="firstname" name="firstname" required placeholder="Jane" />
-          </div>
-          <div class="field">
-            <label for="lastname">Last Name</label>
-            <input type="text" id="lastname" name="lastname" required placeholder="Smith" />
-          </div>
+  <!-- ── STEP 1: Your Info ─────────────────────────── -->
+  <div class="step active" id="step-1">
+    <div class="step-title">Your Info</div>
+    <div class="row-2">
+      <div class="field"><label for="firstname">First Name</label><input type="text" id="firstname" name="firstname" placeholder="Jane" /></div>
+      <div class="field"><label for="lastname">Last Name</label><input type="text" id="lastname" name="lastname" placeholder="Smith" /></div>
+    </div>
+    <div class="row-2">
+      <div class="field"><label for="email">Email</label><input type="email" id="email" name="email" placeholder="jane@email.com" /></div>
+      <div class="field"><label for="phone">Phone</label><input type="tel" id="phone" name="phone" placeholder="(555) 000-0000" required /></div>
+    </div>
+    <div class="consent-text">
+      Kati Spaniak is a licensed real estate agent with eXp Realty in Florida and Illinois. By clicking "NEXT," I consent to receive calls, SMS messages, and emails from Kati Spaniak of eXp Realty at the telephone number and email address I have provided. This consent applies even if my number is on a Do Not Call list, is not a condition of purchase, and I can opt out anytime.
+    </div>
+    <div class="privacy-links">
+      <a href="https://katispaniak.com/privacypolicy" target="_blank">Privacy Policy</a>
+      &nbsp;|&nbsp;
+      <a href="https://katispaniak.com/terms" target="_blank">Terms of Service</a>
+    </div>
+    <div class="step-nav">
+      <span></span>
+      <button class="btn-next" onclick="goNext(1)">NEXT &nbsp;→</button>
+    </div>
+  </div>
+
+  <!-- ── STEP 2: Address + Agent Type ──────────────── -->
+  <div class="step" id="step-2">
+    <div class="step-title">Your Current Address</div>
+    <p style="font-size:0.8rem;color:var(--navy);margin:-0.75rem 0 1rem;line-height:1.5;">This address is where you live. If the home you are selling is a different address, you will enter that later.</p>
+    <div class="field"><label for="current_street">Street Address</label><input type="text" id="current_street" name="current_street" placeholder="123 Main St" /></div>
+    <div class="row-3">
+      <div class="field"><label for="current_city">City</label><input type="text" id="current_city" name="current_city" placeholder="Chicago" /></div>
+      <div class="field"><label for="current_state">State</label><input type="text" id="current_state" name="current_state" placeholder="IL" maxlength="2" /></div>
+      <div class="field"><label for="current_zip">ZIP</label><input type="text" id="current_zip" name="current_zip" placeholder="60601" /></div>
+    </div>
+    <div class="field" style="margin-top:0.5rem;">
+      <label>What kind of agent do you need?</label>
+      <div class="agent-type-grid" style="margin-top:0.5rem;">
+        <div>
+          <input class="at-radio" type="radio" name="property_type_of_agent_required" id="at-sell" value="sellers_agent_only" />
+          <label class="at-label" for="at-sell"><span class="at-icon">🏡</span><span class="at-title">Sell My Home</span><span class="at-sub">Listing agent</span></label>
         </div>
-        <div class="field-row">
-          <div class="field">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required placeholder="jane@email.com" />
-          </div>
-          <div class="field">
-            <label for="phone">Phone</label>
-            <input type="tel" id="phone" name="phone" placeholder="(555) 000-0000" />
-          </div>
+        <div>
+          <input class="at-radio" type="radio" name="property_type_of_agent_required" id="at-buy" value="buyers_agent_only" />
+          <label class="at-label" for="at-buy"><span class="at-icon">🔑</span><span class="at-title">Buy a Home</span><span class="at-sub">Buyer's agent</span></label>
         </div>
-        <div class="field-row single" style="margin-bottom:1rem;">
-          <p style="font-size:0.82rem;font-weight:700;color:var(--navy);">Current Address <span style="font-weight:400;color:var(--teal);">(where you live, not necessarily the home you are selling)</span></p>
-        </div>
-        <div class="field-row single">
-          <div class="field">
-            <label for="current_street">Street Address</label>
-            <input type="text" id="current_street" name="current_street" placeholder="123 Main St" />
-          </div>
-        </div>
-        <div class="field-row triple">
-          <div class="field">
-            <label for="current_city">City</label>
-            <input type="text" id="current_city" name="current_city" placeholder="Chicago" />
-          </div>
-          <div class="field">
-            <label for="current_state">State</label>
-            <input type="text" id="current_state" name="current_state" placeholder="IL" maxlength="2" />
-          </div>
-          <div class="field">
-            <label for="current_zip">ZIP Code</label>
-            <input type="text" id="current_zip" name="current_zip" placeholder="60601" />
-          </div>
+        <div>
+          <input class="at-radio" type="radio" name="property_type_of_agent_required" id="at-both" value="both" />
+          <label class="at-label" for="at-both"><span class="at-icon">🔄</span><span class="at-title">Both</span><span class="at-sub">Sell &amp; buy</span></label>
         </div>
       </div>
+    </div>
+    <div class="step-nav">
+      <button class="btn-back" onclick="goBack(2)">← Back</button>
+      <button class="btn-next" onclick="goNext(2)">NEXT &nbsp;→</button>
+    </div>
+  </div>
 
-      <!-- WHAT KIND OF AGENT -->
-      <div class="form-section">
-        <div class="form-section-title">What kind of agent do you need?</div>
-        <div class="agent-type-grid">
-          <div>
-            <input class="agent-type-option" type="radio" name="property_type_of_agent_required" id="at-sell" value="sellers_agent_only" />
-            <label class="agent-type-label" for="at-sell">
-              <span class="at-icon">🏡</span>
-              <span class="at-title">Sell My Home</span>
-              <span class="at-sub">I need a listing agent</span>
-            </label>
-          </div>
-          <div>
-            <input class="agent-type-option" type="radio" name="property_type_of_agent_required" id="at-buy" value="buyers_agent_only" />
-            <label class="agent-type-label" for="at-buy">
-              <span class="at-icon">🔑</span>
-              <span class="at-title">Buy a Home</span>
-              <span class="at-sub">I need a buyer's agent</span>
-            </label>
-          </div>
-          <div>
-            <input class="agent-type-option" type="radio" name="property_type_of_agent_required" id="at-both" value="both" />
-            <label class="agent-type-label" for="at-both">
-              <span class="at-icon">🔄</span>
-              <span class="at-title">Both</span>
-              <span class="at-sub">Selling &amp; buying</span>
-            </label>
-          </div>
+  <!-- ── STEP 3: About the Property ────────────────── -->
+  <div class="step" id="step-3">
+    <!-- Seller fields -->
+    <div id="seller-fields">
+      <div class="step-title">About the Home You're Selling</div>
+      <div class="field">
+        <label class="optional" for="street_address">Property Street Address</label>
+        <input type="text" id="street_address" name="street_address" placeholder="Same as current, or different address" />
+      </div>
+      <div class="row-3">
+        <div class="field"><label class="optional" for="city">City</label><input type="text" id="city" name="city" placeholder="Naperville" /></div>
+        <div class="field"><label class="optional" for="state">State</label><input type="text" id="state" name="state" placeholder="IL" maxlength="2" /></div>
+        <div class="field"><label class="optional" for="zip_code">ZIP</label><input type="text" id="zip_code" name="zip_code" placeholder="60540" /></div>
+      </div>
+      <div class="row-2">
+        <div class="field">
+          <label for="goal_list_date">When do you want to list?</label>
+          <select id="goal_list_date" name="goal_list_date">
+            <option value="">— Select —</option>
+            <option value="in_1_3_months">Within 1–3 months</option>
+            <option value="in_3_6_months">Within 3–6 months</option>
+            <option value="in_6_12_months">Within 6–12 months</option>
+            <option value="in_1_year">Within 1 year</option>
+            <option value="in_2_years">Within 2 years</option>
+            <option value="in_3_plus_years">3+ years from now</option>
+            <option value="unsure">Not sure yet</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="listing_agreement_signed">Listing agreement signed?</label>
+          <select id="listing_agreement_signed" name="listing_agreement_signed">
+            <option value="">— Select —</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+            <option value="unsure">Not sure</option>
+          </select>
         </div>
       </div>
-
-      <!-- SELLER SECTION -->
-      <div class="form-section conditional-section" id="seller-section">
-        <div class="form-section-title">About the Home You're Selling</div>
-        <div class="field-row single" style="margin-bottom:0.5rem;">
-          <label class="checkbox-item" id="same-address-label">
-            <input type="checkbox" id="same-address-checkbox" />
-            Same as my current address above
+      <!-- Expiry date — shown only when listing agreement is signed -->
+      <div class="field" id="expiry-section" style="display:none;">
+        <label class="optional" for="listing_agreement_expiry">When does your listing agreement expire?</label>
+        <input type="text" id="listing_agreement_expiry" name="listing_agreement_expiry" placeholder="e.g. June 15, 2026" />
+      </div>
+      <div class="row-2">
+        <div class="field"><label class="optional" for="subdivision">Subdivision / Neighborhood</label><input type="text" id="subdivision" name="subdivision" placeholder="e.g. Whispering Oaks" /></div>
+        <div class="field"><label class="optional" for="listed_previously">Listed before?</label><input type="text" id="listed_previously" name="listed_previously" placeholder="Yes / No / Details" /></div>
+      </div>
+      <div class="field" id="moving-to-field">
+        <label class="optional" for="moving_to">Where are you moving after selling?</label>
+        <input type="text" id="moving_to" name="moving_to" placeholder="e.g. Arizona, or staying local" />
+      </div>
+    </div>
+    <!-- Buyer fields -->
+    <div id="buyer-fields" style="display:none;">
+      <div class="step-title">About Your Home Search</div>
+      <!-- "Both" only: same location question -->
+      <div class="field" id="same-location-section" style="display:none;">
+        <label>Are you buying in the same area you're selling?</label>
+        <div style="display:flex;gap:1.5rem;margin-top:0.4rem;">
+          <label style="display:flex;align-items:center;gap:0.5rem;cursor:pointer;font-size:0.9rem;">
+            <input type="radio" name="location_of_buy" value="yes" style="accent-color:var(--gold);width:16px;height:16px;" /> Yes, same area
+          </label>
+          <label style="display:flex;align-items:center;gap:0.5rem;cursor:pointer;font-size:0.9rem;">
+            <input type="radio" name="location_of_buy" value="no" style="accent-color:var(--gold);width:16px;height:16px;" /> No, different area
           </label>
         </div>
-        <div class="field-row single">
-          <div class="field">
-            <label for="street_address">Property Street Address</label>
-            <input type="text" id="street_address" name="street_address" placeholder="456 Oak Ave" />
-          </div>
-        </div>
-        <div class="field-row triple">
-          <div class="field">
-            <label for="city">City</label>
-            <input type="text" id="city" name="city" placeholder="Naperville" />
-          </div>
-          <div class="field">
-            <label for="state">State</label>
-            <input type="text" id="state" name="state" placeholder="IL" maxlength="2" />
-          </div>
-          <div class="field">
-            <label for="zip_code">ZIP Code</label>
-            <input type="text" id="zip_code" name="zip_code" placeholder="60540" />
-          </div>
-        </div>
-        <div class="field-row">
-          <div class="field">
-            <label for="goal_list_date">When do you want to list?</label>
-            <select id="goal_list_date" name="goal_list_date">
-              <option value="">— Select —</option>
-              <option value="in_1_3_months">Within 1–3 months</option>
-              <option value="in_3_6_months">Within 3–6 months</option>
-              <option value="in_6_12_months">Within 6–12 months</option>
-              <option value="in_1_year">Within 1 year</option>
-              <option value="in_2_years">Within 2 years</option>
-              <option value="in_3_plus_years">3+ years from now</option>
-              <option value="unsure">Not sure yet</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="listing_agreement_signed">Have you signed a listing agreement?</label>
-            <select id="listing_agreement_signed" name="listing_agreement_signed">
-              <option value="">— Select —</option>
-              <option value="yes">Yes</option>
-              <option value="no">No</option>
-              <option value="unsure">Not sure</option>
-            </select>
-          </div>
-        </div>
-        <div class="field-row single conditional-section" id="expiry-section">
-          <div class="field">
-            <label for="listing_agreement_expiry">When does your listing agreement expire?</label>
-            <input type="text" id="listing_agreement_expiry" name="listing_agreement_expiry" placeholder="e.g. June 15, 2026" />
-          </div>
-        </div>
-        <div class="field-row">
-          <div class="field">
-            <label for="subdivision">Subdivision Name</label>
-            <input type="text" id="subdivision" name="subdivision" placeholder="e.g. Whispering Oaks" />
-          </div>
-          <div class="field">
-            <label for="listed_previously">Have you listed this home before?</label>
-            <input type="text" id="listed_previously" name="listed_previously" placeholder="Yes / No / Details" />
-          </div>
-        </div>
-        <div class="field-row single" id="moving-to-row">
-          <div class="field">
-            <label for="moving_to">Where are you planning to move after selling?</label>
-            <input type="text" id="moving_to" name="moving_to" placeholder="e.g. Arizona, or staying local" />
-          </div>
-        </div>
       </div>
-
-      <!-- BUYER SECTION -->
-      <div class="form-section conditional-section" id="buyer-section">
-        <div class="form-section-title">About Your Home Search</div>
-
-        <!-- "Both" only: same location question -->
-        <div class="conditional-section" id="same-location-section">
-          <div class="field-row single" style="margin-bottom:1rem;">
-            <div class="field">
-              <label>Are you buying in the same area you're selling?</label>
-              <div style="display:flex;gap:1rem;margin-top:0.4rem;">
-                <label class="checkbox-item">
-                  <input type="radio" name="location_of_buy" value="yes" /> Yes, same area
-                </label>
-                <label class="checkbox-item">
-                  <input type="radio" name="location_of_buy" value="no" /> No, different area
-                </label>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="field-row single">
-          <div class="field">
-            <label for="buying_locations">Where are you looking to buy?</label>
-            <input type="text" id="buying_locations" name="buying_locations" placeholder="e.g. Naperville, Aurora, or surrounding suburbs" />
-          </div>
-        </div>
-        <div class="field-row">
-          <div class="field">
-            <label for="buyer_budget">Your Budget</label>
-            <input type="number" id="buyer_budget" name="buyer_budget" placeholder="e.g. 450000" min="0" />
-          </div>
+      <!-- Buyer detail fields — always shown for Buy only; shown only when "No, different area" for Both -->
+      <div id="buyer-details" style="display:none;">
+        <div class="field"><label for="buying_locations">Where are you looking to buy?</label><input type="text" id="buying_locations" name="buying_locations" placeholder="e.g. Naperville, Aurora, surrounding suburbs" /></div>
+        <div class="row-2">
+          <div class="field"><label for="buyer_budget">Your Budget</label><input type="number" id="buyer_budget" name="buyer_budget" placeholder="e.g. 450000" min="0" /></div>
           <div class="field">
             <label for="preapproval">Pre-approval Status</label>
             <select id="preapproval" name="preapproval">
@@ -523,19 +365,13 @@
             </select>
           </div>
         </div>
-        <div class="field-row">
-          <div class="field">
-            <label for="move_timing">When do you need to move by?</label>
-            <input type="text" id="move_timing" name="move_timing" placeholder="e.g. By June 2026" />
-          </div>
-          <div class="field">
-            <label for="looking_at_homes">Have you started looking at homes?</label>
-            <input type="text" id="looking_at_homes" name="looking_at_homes" placeholder="Yes / No / Just online" />
-          </div>
+        <div class="row-2">
+          <div class="field"><label class="optional" for="move_timing">When do you need to move by?</label><input type="text" id="move_timing" name="move_timing" placeholder="e.g. By June 2026" /></div>
+          <div class="field"><label class="optional" for="looking_at_homes">Have you started looking at homes?</label><input type="text" id="looking_at_homes" name="looking_at_homes" placeholder="Yes / No / Just online" /></div>
         </div>
-        <div class="field-row single">
+        <div class="row-2">
           <div class="field">
-            <label for="buyers_agreement_signed">Have you signed a buyer's agreement?</label>
+            <label class="optional" for="buyers_agreement_signed">Buyer's agreement signed?</label>
             <select id="buyers_agreement_signed" name="buyers_agreement_signed">
               <option value="">— Select —</option>
               <option value="yes">Yes</option>
@@ -545,140 +381,194 @@
           </div>
         </div>
       </div>
-
-      <!-- ABOUT YOU -->
-      <div class="form-section conditional-section" id="about-you-section">
-        <div class="form-section-title">About You</div>
-        <div class="field-row single" style="margin-bottom:1.25rem;">
-          <div class="field">
-            <label>What qualities matter most in an agent? (select up to three)</label>
-            <div class="checkbox-grid">
-              <label class="checkbox-item"><input type="checkbox" name="agent_qualities" value="Strong negotiator" /> Strong negotiator</label>
-              <label class="checkbox-item"><input type="checkbox" name="agent_qualities" value="Great communicator" /> Great communicator</label>
-              <label class="checkbox-item"><input type="checkbox" name="agent_qualities" value="Deep local knowledge" /> Deep local knowledge</label>
-              <label class="checkbox-item"><input type="checkbox" name="agent_qualities" value="Responsive and available" /> Responsive and available</label>
-              <label class="checkbox-item"><input type="checkbox" name="agent_qualities" value="Experience with my price range" /> Experience with my price range</label>
-              <label class="checkbox-item"><input type="checkbox" name="agent_qualities" value="Strong marketing / photography" /> Strong marketing / photography</label>
-              <label class="checkbox-item"><input type="checkbox" name="agent_qualities" value="Patient and low-pressure" /> Patient and low-pressure</label>
-              <label class="checkbox-item"><input type="checkbox" name="agent_qualities" value="Proven track record" /> Proven track record</label>
-            </div>
-          </div>
-        </div>
-        <div class="field-row single" style="margin-bottom:1.25rem;">
-          <div class="field">
-            <label>How much hand-holding do you need from your agent?</label>
-            <div class="scale-row">
-              <div><input class="scale-option" type="radio" name="hand_holding" id="hh1" value="1" /><label class="scale-label" for="hh1"><span class="scale-num">1</span></label></div>
-              <div><input class="scale-option" type="radio" name="hand_holding" id="hh2" value="2" /><label class="scale-label" for="hh2"><span class="scale-num">2</span></label></div>
-              <div><input class="scale-option" type="radio" name="hand_holding" id="hh3" value="3" /><label class="scale-label" for="hh3"><span class="scale-num">3</span></label></div>
-              <div><input class="scale-option" type="radio" name="hand_holding" id="hh4" value="4" /><label class="scale-label" for="hh4"><span class="scale-num">4</span></label></div>
-              <div><input class="scale-option" type="radio" name="hand_holding" id="hh5" value="5" /><label class="scale-label" for="hh5"><span class="scale-num">5</span></label></div>
-              <div><input class="scale-option" type="radio" name="hand_holding" id="hh6" value="6" /><label class="scale-label" for="hh6"><span class="scale-num">6</span></label></div>
-              <div><input class="scale-option" type="radio" name="hand_holding" id="hh7" value="7" /><label class="scale-label" for="hh7"><span class="scale-num">7</span></label></div>
-              <div><input class="scale-option" type="radio" name="hand_holding" id="hh8" value="8" /><label class="scale-label" for="hh8"><span class="scale-num">8</span></label></div>
-              <div><input class="scale-option" type="radio" name="hand_holding" id="hh9" value="9" /><label class="scale-label" for="hh9"><span class="scale-num">9</span></label></div>
-              <div><input class="scale-option" type="radio" name="hand_holding" id="hh10" value="10" /><label class="scale-label" for="hh10"><span class="scale-num">10</span></label></div>
-            </div>
-            <div class="scale-end-labels">
-              <span>Hands-off</span>
-              <span>Very hands-on</span>
-            </div>
-          </div>
-        </div>
-        <div class="field-row single">
-          <div class="field">
-            <label for="best_time_to_reach">Best time to reach you</label>
-            <input type="text" id="best_time_to_reach" name="best_time_to_reach" placeholder="e.g. Weekday mornings" />
-          </div>
-        </div>
-        <div class="field-row single" id="agents-required-row" style="display:none">
-          <div class="field">
-            <label for="agents_required">How many seller's agents would you like us to refer you to?</label>
-            <p style="font-size:0.78rem;color:var(--teal);margin:-4px 0 8px;line-height:1.5;">Note: if your home is currently listed with an agent, we will refer one at a time to ensure we are finding you the best fit.</p>
-            <div class="agent-type-options" style="display:flex;flex-direction:row;gap:1.5rem;margin-top:0.25rem;">
-              <div>
-                <input class="agent-type-option" type="radio" name="agents_required" id="ar-1" value="1" />
-                <label class="agent-type-label" for="ar-1" style="flex:0 0 auto;padding:0.6rem 1.4rem;">
-                  <span class="at-title">1</span>
-                </label>
-              </div>
-              <div>
-                <input class="agent-type-option" type="radio" name="agents_required" id="ar-2" value="2" />
-                <label class="agent-type-label" for="ar-2" style="flex:0 0 auto;padding:0.6rem 1.4rem;">
-                  <span class="at-title">2</span>
-                </label>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="field-row single">
-          <div class="field">
-            <label for="dnr">Who have you already spoken with or met AND is there an agent in your community you do NOT want us to refer you to?</label>
-            <p style="font-size:0.78rem;color:var(--teal);margin:-4px 0 8px;line-height:1.5;">(Please fill this question out thoroughly as we do not want to double refer you) We will not refer anyone you have spoken with already or anyone you have asked us not to refer.</p>
-            <input type="text" id="dnr" name="dnr" placeholder="Agent names to not refer" />
-          </div>
-        </div>
-        <div class="field-row single">
-          <div class="field">
-            <label for="current_situation">Anything else we should know?</label>
-            <textarea id="current_situation" name="current_situation" placeholder="Tell us anything that would help us find the right agent for you…"></textarea>
-          </div>
-        </div>
-      </div>
-
-      <div class="submit-row conditional-section" id="submit-row">
-        <button type="submit" class="btn-submit" id="submit-btn">Submit My Request</button>
-        <p class="submit-note">Free &middot; No obligation &middot; Kati's team will follow up within 1 business day</p>
-      </div>
-
-    </form>
-
-    <div class="result-box success" id="success-box">
-      <h3>You're all set! 🎉</h3>
-      <p>Thanks — we received your request. Kati's team will review your answers and reach out within 1 business day to discuss your options.</p>
     </div>
-
-    <div class="result-box error" id="error-box">
-      <h3>Something went wrong</h3>
-      <p id="error-msg">There was a problem submitting your form. Please try again or call us at 847.713.1556.</p>
+    <div class="step-nav">
+      <button class="btn-back" onclick="goBack(3)">← Back</button>
+      <button class="btn-next" onclick="goNext(3)">NEXT &nbsp;→</button>
     </div>
   </div>
 
-  <footer>
-    <strong>Truth in Real Estate®</strong> &mdash; Kati Spaniak<br />
-    Licensed Real Estate Broker in Illinois &amp; Florida &mdash; eXp Realty<br />
-    847.713.1556 &nbsp;|&nbsp; <a href="https://katispaniak.com">KatiSpaniak.com</a><br /><br />
-    <a href="index.html">Client Portal</a> &nbsp;&middot;&nbsp;
-    <a href="https://tire-main.fly.dev">Main Site</a><br /><br />
-    &copy; 2026 Kati Spaniak &mdash; Truth in Real Estate®
-  </footer>
+  <!-- ── STEP 4: About You ──────────────────────────── -->
+  <div class="step" id="step-4">
+    <div class="step-title">About You</div>
+    <div class="field">
+      <label>What qualities matter most in an agent? <span style="font-weight:400;color:var(--teal);font-size:0.78rem;">(select up to 3)</span></label>
+      <div class="checkbox-grid">
+        <label class="cb-item"><input type="checkbox" name="agent_qualities" value="Strong negotiator" /> Strong negotiator</label>
+        <label class="cb-item"><input type="checkbox" name="agent_qualities" value="Great communicator" /> Great communicator</label>
+        <label class="cb-item"><input type="checkbox" name="agent_qualities" value="Deep local knowledge" /> Deep local knowledge</label>
+        <label class="cb-item"><input type="checkbox" name="agent_qualities" value="Responsive and available" /> Responsive &amp; available</label>
+        <label class="cb-item"><input type="checkbox" name="agent_qualities" value="Experience with my price range" /> My price range experience</label>
+        <label class="cb-item"><input type="checkbox" name="agent_qualities" value="Strong marketing / photography" /> Strong marketing</label>
+        <label class="cb-item"><input type="checkbox" name="agent_qualities" value="Patient and low-pressure" /> Patient, low-pressure</label>
+        <label class="cb-item"><input type="checkbox" name="agent_qualities" value="Proven track record" /> Proven track record</label>
+      </div>
+    </div>
+    <div class="field">
+      <label>How much hand-holding do you need from your agent?</label>
+      <div class="scale-row">
+        <div><input class="scale-radio" type="radio" name="hand_holding" id="hh1" value="1" /><label class="scale-label" for="hh1"><span class="scale-num">1</span></label></div>
+        <div><input class="scale-radio" type="radio" name="hand_holding" id="hh2" value="2" /><label class="scale-label" for="hh2"><span class="scale-num">2</span></label></div>
+        <div><input class="scale-radio" type="radio" name="hand_holding" id="hh3" value="3" /><label class="scale-label" for="hh3"><span class="scale-num">3</span></label></div>
+        <div><input class="scale-radio" type="radio" name="hand_holding" id="hh4" value="4" /><label class="scale-label" for="hh4"><span class="scale-num">4</span></label></div>
+        <div><input class="scale-radio" type="radio" name="hand_holding" id="hh5" value="5" /><label class="scale-label" for="hh5"><span class="scale-num">5</span></label></div>
+        <div><input class="scale-radio" type="radio" name="hand_holding" id="hh6" value="6" /><label class="scale-label" for="hh6"><span class="scale-num">6</span></label></div>
+        <div><input class="scale-radio" type="radio" name="hand_holding" id="hh7" value="7" /><label class="scale-label" for="hh7"><span class="scale-num">7</span></label></div>
+        <div><input class="scale-radio" type="radio" name="hand_holding" id="hh8" value="8" /><label class="scale-label" for="hh8"><span class="scale-num">8</span></label></div>
+        <div><input class="scale-radio" type="radio" name="hand_holding" id="hh9" value="9" /><label class="scale-label" for="hh9"><span class="scale-num">9</span></label></div>
+        <div><input class="scale-radio" type="radio" name="hand_holding" id="hh10" value="10" /><label class="scale-label" for="hh10"><span class="scale-num">10</span></label></div>
+      </div>
+      <div class="scale-ends"><span>Hands-off</span><span>Full guidance</span></div>
+    </div>
+    <div class="field">
+      <label for="best_time_to_reach">Best time to reach you</label>
+      <input type="text" id="best_time_to_reach" name="best_time_to_reach" placeholder="e.g. Weekday mornings CST" />
+    </div>
+    <!-- Number of agents (seller only) -->
+    <div class="field" id="agents-required-field" style="display:none;">
+      <label>How many seller's agents would you like referred?</label>
+      <div style="display:flex;gap:1rem;margin-top:0.4rem;">
+        <label style="display:flex;align-items:center;gap:0.5rem;cursor:pointer;font-size:0.9rem;">
+          <input type="radio" name="agents_required" value="1" style="accent-color:var(--gold);width:16px;height:16px;" /> 1 agent
+        </label>
+        <label style="display:flex;align-items:center;gap:0.5rem;cursor:pointer;font-size:0.9rem;">
+          <input type="radio" name="agents_required" value="2" style="accent-color:var(--gold);width:16px;height:16px;" /> 2 agents
+        </label>
+      </div>
+    </div>
+    <div class="field">
+      <label for="dnr">Agents you've already spoken with (we won't re-refer them)</label>
+      <input type="text" id="dnr" name="dnr" placeholder="Names, or 'none'" />
+    </div>
+    <div class="field">
+      <label for="current_situation">Anything else we should know?</label>
+      <textarea id="current_situation" name="current_situation" placeholder="Tell us anything that would help us find the right agent for you…"></textarea>
+    </div>
+    <!-- Terms & Conditions -->
+    <div class="field" style="margin-top:0.5rem;">
+      <label class="tc-label" for="terms_agree">
+        <input type="checkbox" id="terms_agree" name="terms_agree" style="width:16px;height:16px;accent-color:var(--navy);flex-shrink:0;cursor:pointer;margin-top:2px;" />
+        <span>By clicking "Submit," I agree to receive calls, texts, and emails from Kati Spaniak of eXp Realty and her recommended agents at the contact information I provide. I'll receive an introductory email and text with their contact details. I understand Kati may receive a referral fee only if I close my home with one of these agents, and that introductions are free. This consent applies even if my number is on a Do Not Call list, is not a condition of purchase, and I can opt out anytime. Kati will never sell or share your information. See her <a href="https://katispaniak.com/privacypolicy" target="_blank" style="color:var(--navy);">Privacy Policy</a>.</span>
+      </label>
+      <p id="terms-error" style="display:none;color:#c84040;font-size:0.78rem;margin-top:0.4rem;">Please agree to the terms to continue.</p>
+    </div>
+    <div class="step-nav">
+      <button class="btn-back" onclick="goBack(4)">← Back</button>
+      <button class="btn-submit" id="submit-btn" onclick="submitForm()">Submit My Request &nbsp;→</button>
+    </div>
+  </div>
+
+  <!-- Success -->
+  <div class="result-box success" id="success-box">
+    <h3>You're all set! 🎉</h3>
+    <p>Thanks — Kati's team will review your answers and reach out within 1 business day to discuss your options.</p>
+  </div>
+
+  <!-- Error -->
+  <div class="result-box error" id="error-box">
+    <h3>Something went wrong</h3>
+    <p id="error-msg">There was a problem submitting your form. Please try again or call us at 847.713.1556.</p>
+  </div>
 
   <script>
     const EDGE_FUNCTION_URL = 'https://lgsutpvfhsumaawrbhms.supabase.co/functions/v1/submit-referral-form'
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxnc3V0cHZmaHN1bWFhd3JiaG1zIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0NzA1ODYsImV4cCI6MjA5MzA0NjU4Nn0.upb76euLJMsFx4W5MZ2nkq5sa0IREf-Luip2JGDAjFk'
 
-    // Same-address checkbox
-    document.getElementById('same-address-checkbox').addEventListener('change', function () {
-      const streetField = document.getElementById('street_address')
-      const cityField   = document.getElementById('city')
-      const stateField  = document.getElementById('state')
-      const zipField    = document.getElementById('zip_code')
+    const stepLabels = ['Step 1 of 4 — Your Info', 'Step 2 of 4 — Your Address', 'Step 3 of 4 — Your Property', 'Step 4 of 4 — About You']
+    let agentType = ''
 
-      if (this.checked) {
-        streetField.value = document.getElementById('current_street').value.trim()
-        cityField.value   = document.getElementById('current_city').value.trim()
-        stateField.value  = document.getElementById('current_state').value.trim()
-        zipField.value    = document.getElementById('current_zip').value.trim()
-        streetField.readOnly = cityField.readOnly = stateField.readOnly = zipField.readOnly = true
-        streetField.style.background = cityField.style.background = stateField.style.background = zipField.style.background = '#f0ede8'
-      } else {
-        streetField.value = cityField.value = stateField.value = zipField.value = ''
-        streetField.readOnly = cityField.readOnly = stateField.readOnly = zipField.readOnly = false
-        streetField.style.background = cityField.style.background = stateField.style.background = zipField.style.background = ''
+    function reportHeight() {
+      setTimeout(function() {
+        // Temporarily collapse body so scrollHeight reflects actual content (not old stretched height)
+        document.body.style.overflow = 'hidden'
+        var h = document.body.scrollHeight
+        document.body.style.overflow = ''
+        window.parent.postMessage({ type: 'iframeResize', height: h }, '*')
+      }, 80)
+    }
+    window.addEventListener('load', reportHeight)
+
+    function setStep(n) {
+      document.querySelectorAll('.step').forEach(s => s.classList.remove('active'))
+      document.getElementById('step-' + n).classList.add('active')
+      for (let i = 1; i <= 4; i++) {
+        document.getElementById('prog-' + i).classList.toggle('active', i <= n)
       }
+      document.getElementById('progress-label').textContent = stepLabels[n - 1]
+      window.scrollTo(0, 0)
+      reportHeight()
+    }
+
+    function validate(fields) {
+      let ok = true
+      fields.forEach(id => {
+        const el = document.getElementById(id)
+        if (!el) return
+        const empty = el.value.trim() === ''
+        el.classList.toggle('field-error', empty)
+        if (empty) ok = false
+      })
+      return ok
+    }
+
+    function validateAgentType() {
+      const checked = document.querySelector('input[name="property_type_of_agent_required"]:checked')
+      const grid = document.querySelector('.agent-type-grid')
+      if (!checked) {
+        grid.style.outline = '2px solid #c84040'
+        grid.style.borderRadius = '8px'
+        return false
+      }
+      grid.style.outline = ''
+      return true
+    }
+
+    function goNext(step) {
+      if (step === 1) {
+        if (!validate(['firstname', 'lastname', 'email', 'phone'])) return
+        setStep(2)
+      } else if (step === 2) {
+        if (!validateAgentType()) return
+        agentType = document.querySelector('input[name="property_type_of_agent_required"]:checked').value
+        // Show correct step 3 fields
+        const isSeller = agentType === 'sellers_agent_only' || agentType === 'both'
+        const isBuyer  = agentType === 'buyers_agent_only'  || agentType === 'both'
+        document.getElementById('seller-fields').style.display = isSeller ? 'block' : 'none'
+        document.getElementById('buyer-fields').style.display  = isBuyer  ? 'block' : 'none'
+        document.getElementById('moving-to-field').style.display = (agentType === 'both') ? 'none' : 'block'
+        document.getElementById('same-location-section').style.display = (agentType === 'both') ? 'block' : 'none'
+        // For "Buy only": show buyer details immediately. For "Both": hide until they pick "No, different area"
+        document.getElementById('buyer-details').style.display = (agentType === 'buyers_agent_only') ? 'block' : 'none'
+        // Show agents-required in step 4 for sellers
+        document.getElementById('agents-required-field').style.display = isSeller ? 'block' : 'none'
+        setStep(3)
+      } else if (step === 3) {
+        setStep(4)
+      }
+    }
+
+    function goBack(step) {
+      setStep(step - 1)
+    }
+
+    // Show/hide listing agreement expiry, and hide agents-required when "yes"
+    document.getElementById('listing_agreement_signed').addEventListener('change', function() {
+      var isSigned = this.value === 'yes'
+      document.getElementById('expiry-section').style.display = isSigned ? 'block' : 'none'
+      var arField = document.getElementById('agents-required-field')
+      if (arField) arField.style.display = isSigned ? 'none' : (agentType === 'sellers_agent_only' || agentType === 'both') ? 'block' : 'none'
+      reportHeight()
     })
 
-    // Limit agent qualities to 3 selections
+    // Show/hide buyer details based on same-location answer (only relevant for "Both")
+    document.querySelectorAll('input[name="location_of_buy"]').forEach(function(radio) {
+      radio.addEventListener('change', function() {
+        document.getElementById('buyer-details').style.display = (this.value === 'no') ? 'block' : 'none'
+        reportHeight()
+      })
+    })
+
+    // Limit agent qualities to 3
     document.querySelectorAll('input[name="agent_qualities"]').forEach(cb => {
       cb.addEventListener('change', () => {
         const checked = document.querySelectorAll('input[name="agent_qualities"]:checked')
@@ -688,244 +578,93 @@
       })
     })
 
-    // Show/hide listing agreement expiry field
-    document.getElementById('listing_agreement_signed').addEventListener('change', function () {
-      document.getElementById('expiry-section').style.display = this.value === 'yes' ? 'block' : 'none'
-      if (this.value === 'yes') {
-        document.getElementById('ar-1').checked = true
-        document.getElementById('ar-2').disabled = true
-        document.getElementById('ar-2').closest('div').style.opacity = '0.4'
-      } else {
-        document.getElementById('ar-2').disabled = false
-        document.getElementById('ar-2').closest('div').style.opacity = '1'
-      }
-    })
-
-    // Show/hide seller and buyer sections based on agent type selection
-    const agentTypeInputs = document.querySelectorAll('input[name="property_type_of_agent_required"]')
-    const sellerSection = document.getElementById('seller-section')
-    const buyerSection = document.getElementById('buyer-section')
-    const sameLocationSection = document.getElementById('same-location-section')
-
-    agentTypeInputs.forEach(input => {
-      input.addEventListener('change', () => {
-        const val = input.value
-        sellerSection.style.display = (val === 'sellers_agent_only' || val === 'both') ? 'block' : 'none'
-        buyerSection.style.display  = (val === 'buyers_agent_only'  || val === 'both') ? 'block' : 'none'
-        sameLocationSection.style.display = (val === 'both') ? 'block' : 'none'
-        document.getElementById('moving-to-row').style.display = (val === 'both') ? 'none' : 'block'
-        document.getElementById('agents-required-row').style.display = (val === 'sellers_agent_only' || val === 'both') ? 'block' : 'none'
-        document.getElementById('about-you-section').style.display = 'block'
-        document.getElementById('submit-row').style.display = 'block'
-      })
-    })
-
-    // Validation helpers
-    function markField(id, valid) {
-      const el = document.getElementById(id)
-      if (!el) return
-      el.style.borderColor = valid ? '' : '#c84040'
-    }
-
-    function checkField(id) {
-      const el = document.getElementById(id)
-      if (!el) return true
-      const ok = el.value.trim() !== ''
-      markField(id, ok)
-      return ok
-    }
-
-    // Form submission
-    document.getElementById('referral-form').addEventListener('submit', async (e) => {
-      e.preventDefault()
-
-      const form = e.target
+    async function submitForm() {
       const btn = document.getElementById('submit-btn')
-      const successBox = document.getElementById('success-box')
-      const errorBox = document.getElementById('error-box')
-      const errorMsg = document.getElementById('error-msg')
-
-      const agentType = form.property_type_of_agent_required.value
-      let valid = true
-      let firstInvalidEl = null
-
-      function fail(id) {
-        valid = false
-        const el = document.getElementById(id)
-        if (el) {
-          el.style.borderColor = '#c84040'
-          if (!firstInvalidEl) firstInvalidEl = el
-        }
-      }
-
-      function need(id) {
-        const el = document.getElementById(id)
-        if (!el) return
-        if (el.value.trim() === '') fail(id)
-        else el.style.borderColor = ''
-      }
-
-      // Always-required fields
-      need('firstname'); need('lastname'); need('email'); need('phone')
-      need('current_street'); need('current_city'); need('current_state'); need('current_zip')
-
-      // Agent type
-      if (!agentType) {
-        valid = false
-        if (!firstInvalidEl) firstInvalidEl = document.querySelector('.agent-type-grid')
-      }
-
-      // Seller fields
-      if (agentType === 'sellers_agent_only' || agentType === 'both') {
-        need('street_address'); need('city'); need('state'); need('zip_code')
-        need('goal_list_date'); need('listing_agreement_signed')
-        if (form.listing_agreement_signed.value === 'yes') need('listing_agreement_expiry')
-        need('subdivision'); need('listed_previously')
-        if (agentType !== 'both') need('moving_to')
-      }
-
-      // Buyer fields
-      if (agentType === 'buyers_agent_only' || agentType === 'both') {
-        need('buying_locations'); need('buyer_budget'); need('preapproval')
-        need('move_timing'); need('looking_at_homes'); need('buyers_agreement_signed')
-      }
-
-      // Agent qualities — at least one checkbox
-      const qualitiesChecked = form.querySelectorAll('input[name="agent_qualities"]:checked').length
-      const qualitiesGrid = form.querySelector('.checkbox-grid')
-      if (qualitiesChecked === 0) {
-        valid = false
-        if (qualitiesGrid) {
-          qualitiesGrid.style.outline = '2px solid #c84040'
-          qualitiesGrid.style.borderRadius = '6px'
-          if (!firstInvalidEl) firstInvalidEl = qualitiesGrid
-        }
-      } else {
-        if (qualitiesGrid) qualitiesGrid.style.outline = ''
-      }
-
-      // Hand holding scale
-      const handHoldingEl = form.elements['hand_holding']
-      const scaleRow = form.querySelector('.scale-row')
-      if (!handHoldingEl || !handHoldingEl.value) {
-        valid = false
-        if (scaleRow) {
-          scaleRow.style.outline = '2px solid #c84040'
-          scaleRow.style.borderRadius = '6px'
-          if (!firstInvalidEl) firstInvalidEl = scaleRow
-        }
-      } else {
-        if (scaleRow) scaleRow.style.outline = ''
-      }
-
-      need('best_time_to_reach'); need('dnr'); need('current_situation')
-      if (agentType === 'sellers_agent_only' || agentType === 'both') {
-        const agentsChecked = document.querySelector('input[name="agents_required"]:checked')
-        if (!agentsChecked) {
-          const agentsRow = document.getElementById('agents-required-row')
-          agentsRow.style.outline = '2px solid #e74c3c'
-          agentsRow.style.borderRadius = '6px'
-          valid = false
-          if (!firstInvalidEl) firstInvalidEl = agentsRow
-        } else {
-          document.getElementById('agents-required-row').style.outline = ''
-        }
-      }
-
-      if (!valid) {
-        errorMsg.textContent = 'Please fill in all required fields (highlighted in red).'
-        errorBox.style.display = 'block'
-        if (firstInvalidEl) firstInvalidEl.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      // Validate T&C checkbox
+      var termsBox = document.getElementById('terms_agree')
+      var termsError = document.getElementById('terms-error')
+      if (!termsBox.checked) {
+        termsError.style.display = 'block'
+        termsBox.closest('.field').scrollIntoView({ behavior: 'smooth', block: 'center' })
         return
       }
-
-      errorBox.style.display = 'none'
+      termsError.style.display = 'none'
 
       btn.disabled = true
       btn.textContent = 'Submitting…'
 
+      const qualities = Array.from(document.querySelectorAll('input[name="agent_qualities"]:checked')).map(c => c.value)
+      const hhEl = document.querySelector('input[name="hand_holding"]:checked')
+      const arEl = document.querySelector('input[name="agents_required"]:checked')
+      const locEl = document.querySelector('input[name="location_of_buy"]:checked')
+
+      const payload = {
+        firstname: document.getElementById('firstname').value.trim(),
+        lastname:  document.getElementById('lastname').value.trim(),
+        email:     document.getElementById('email').value.trim(),
+        phone:     document.getElementById('phone').value.trim() || null,
+        current_street: document.getElementById('current_street').value.trim() || null,
+        current_city:   document.getElementById('current_city').value.trim() || null,
+        current_state:  document.getElementById('current_state').value.trim() || null,
+        current_zip:    document.getElementById('current_zip').value.trim() || null,
+        property_type_of_agent_required: agentType,
+        street_address: document.getElementById('street_address').value.trim() || null,
+        city:      document.getElementById('city').value.trim() || null,
+        state:     document.getElementById('state').value.trim() || null,
+        zip_code:  document.getElementById('zip_code').value.trim() || null,
+        country:   'US',
+        goal_list_date: document.getElementById('goal_list_date').value || null,
+        listing_agreement_signed: document.getElementById('listing_agreement_signed').value || null,
+        listing_agreement_expiry: document.getElementById('listing_agreement_expiry').value.trim() || null,
+        subdivision: document.getElementById('subdivision').value.trim() || null,
+        listed_previously: document.getElementById('listed_previously').value.trim() || null,
+        moving_to: document.getElementById('moving_to').value.trim() || null,
+        location_of_buy: locEl ? locEl.value : null,
+        buying_locations: document.getElementById('buying_locations').value.trim() || null,
+        buyer_budget: document.getElementById('buyer_budget').value ? parseFloat(document.getElementById('buyer_budget').value) : null,
+        preapproval: document.getElementById('preapproval').value || null,
+        move_timing: document.getElementById('move_timing').value.trim() || null,
+        looking_at_homes: document.getElementById('looking_at_homes').value.trim() || null,
+        buyers_agreement_signed: document.getElementById('buyers_agreement_signed').value || null,
+        agent_qualities: qualities,
+        hand_holding: hhEl ? parseInt(hhEl.value) : null,
+        best_time_to_reach: document.getElementById('best_time_to_reach').value.trim() || null,
+        // If listing agreement is signed, default to 1 agent regardless of radio selection
+        agents_required: document.getElementById('listing_agreement_signed').value === 'yes' ? 1 : (arEl ? parseInt(arEl.value) : null),
+        dnr: document.getElementById('dnr').value.trim() || null,
+        current_situation: document.getElementById('current_situation').value.trim() || null,
+      }
+
       try {
-        // Collect checked agent qualities
-        const qualities = Array.from(form.querySelectorAll('input[name="agent_qualities"]:checked'))
-          .map(cb => cb.value)
-
-        const locationOfBuyEl = form.elements['location_of_buy']
-        const handHoldingEl   = form.elements['hand_holding']
-
-        const payload = {
-          firstname:                            form.firstname.value.trim(),
-          lastname:                             form.lastname.value.trim(),
-          email:                                form.email.value.trim(),
-          phone:                              form.phone.value.trim() || null,
-          current_street:                     form.current_street.value.trim() || null,
-          current_city:                       form.current_city.value.trim() || null,
-          current_state:                      form.current_state.value.trim() || null,
-          current_zip:                        form.current_zip.value.trim() || null,
-          property_type_of_agent_required:    agentType,
-
-          // Seller fields
-          street_address:                     form.street_address.value.trim() || null,
-          city:                               form.city.value.trim() || null,
-          state:                              form.state.value.trim() || null,
-          zip_code:                           form.zip_code.value.trim() || null,
-          country:                            'US',
-          goal_list_date:                     form.goal_list_date.value || null,
-          listing_agreement_signed:           form.listing_agreement_signed.value || null,
-          listing_agreement_expiry:           form.listing_agreement_expiry.value.trim() || null,
-          subdivision:                        form.subdivision.value.trim() || null,
-          listed_previously:                  form.listed_previously.value.trim() || null,
-          moving_to:                          form.moving_to.value.trim() || null,
-
-          // Buyer fields
-          location_of_buy:                    locationOfBuyEl ? (locationOfBuyEl.value || null) : null,
-          buying_locations:                   form.buying_locations.value.trim() || null,
-          buyer_budget:                       form.buyer_budget.value ? parseFloat(form.buyer_budget.value) : null,
-          preapproval:                        form.preapproval.value || null,
-          move_timing:                        form.move_timing.value.trim() || null,
-          looking_at_homes:                   form.looking_at_homes.value.trim() || null,
-          buyers_agreement_signed:            form.buyers_agreement_signed.value || null,
-
-          // Shared
-          agent_qualities:                    qualities,
-          hand_holding:                       handHoldingEl && handHoldingEl.value ? parseInt(handHoldingEl.value) : null,
-          best_time_to_reach:                 form.best_time_to_reach.value.trim() || null,
-          agents_required:                    (() => { const c = document.querySelector('input[name="agents_required"]:checked'); return c ? parseInt(c.value) : null; })(),
-          dnr:                                form.dnr.value.trim() || null,
-          current_situation:                  form.current_situation.value.trim() || null,
-        }
-
-        console.log('Submitting to:', EDGE_FUNCTION_URL)
-        console.log('Payload:', JSON.stringify(payload, null, 2))
-
         const res = await fetch(EDGE_FUNCTION_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` },
           body: JSON.stringify(payload),
         })
-
-        console.log('Response status:', res.status)
         const data = await res.json()
-        console.log('Response body:', data)
-
         if (res.ok && data.success) {
-          form.style.display = 'none'
-          successBox.style.display = 'block'
-          window.scrollTo({ top: 0, behavior: 'smooth' })
+          document.querySelectorAll('.step').forEach(s => s.style.display = 'none')
+          document.querySelector('.form-header').style.display = 'none'
+          document.querySelector('.progress-bar').style.display = 'none'
+          document.querySelector('.progress-label').style.display = 'none'
+          document.getElementById('success-box').style.display = 'block'
+          reportHeight()
+          setTimeout(() => window.parent.postMessage('formSubmitted', '*'), 2500)
         } else {
-          errorMsg.textContent = `HTTP ${res.status}: ${data.error || JSON.stringify(data)}`
-          errorBox.style.display = 'block'
+          document.getElementById('error-msg').textContent = data.error || 'Submission failed. Please try again.'
+          document.getElementById('error-box').style.display = 'block'
           btn.disabled = false
-          btn.textContent = 'Submit My Request'
+          btn.textContent = 'Submit My Request  →'
+          reportHeight()
         }
       } catch (err) {
-        console.error('Submit error:', err)
-        errorMsg.textContent = `Error: ${err.message}`
-        errorBox.style.display = 'block'
+        document.getElementById('error-msg').textContent = 'Error: ' + err.message
+        document.getElementById('error-box').style.display = 'block'
         btn.disabled = false
-        btn.textContent = 'Submit My Request'
+        btn.textContent = 'Submit My Request  →'
+        reportHeight()
       }
-    })
+    }
   </script>
-
 </body>
 </html>
