@@ -612,14 +612,14 @@ background-position: initial;
 
     :root {
       --navy: #14213d;
-      --cream: #faf9f6;
+      --cream: #ffffff;
       --teal: #7a928d;
       --gold: #d4b07a;
       --white: #ffffff;
       --border: #cde0ec;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--navy); }
+    html, body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--navy); }
 
     /* ── Header ─────────────────────────────────────── */
     .form-header {
@@ -695,7 +695,7 @@ background-position: initial;
       font-family: 'Inter', sans-serif;
       font-size: 0.9rem;
       color: var(--navy);
-      background: var(--white);
+      background: var(--cream);
       transition: border-color 0.15s;
       appearance: none;
     }
@@ -718,7 +718,7 @@ background-position: initial;
       display: flex; align-items: center; justify-content: center;
       border: 1px solid #dde5ea; border-radius: 4px;
       padding: 0.65rem 0.5rem; cursor: pointer; text-align: center;
-      transition: border-color 0.15s, background 0.15s, color 0.15s; background: var(--white);
+      transition: border-color 0.15s, background 0.15s, color 0.15s; background: var(--cream);
     }
     .at-radio:checked + .at-label { border-color: var(--navy); background: var(--navy); }
     .at-radio:checked + .at-label .at-title { color: #fff; }
@@ -737,7 +737,7 @@ background-position: initial;
     .scale-label {
       display: flex; align-items: center; justify-content: center;
       border: 1px solid #dde5ea; border-radius: 4px; padding: 0.65rem 0;
-      cursor: pointer; background: var(--white); transition: border-color 0.15s, background 0.15s, color 0.15s;
+      cursor: pointer; background: var(--cream); transition: border-color 0.15s, background 0.15s, color 0.15s;
       width: 100%; text-align: center;
     }
     .scale-num { font-size: 0.82rem; font-weight: 500; color: var(--navy); font-family: 'Montserrat', sans-serif; display: block; width: 100%; text-align: center; }
@@ -811,7 +811,7 @@ background-position: initial;
 </style>
 
 <div id="form-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:99999;align-items:flex-start;justify-content:center;padding:1.5rem;overflow-y:auto;">
-  <div style="background:#fff;border-radius:4px;max-width:560px;width:100%;position:relative;margin:auto;">
+  <div style="background:#ffffff;border-radius:4px;max-width:560px;width:100%;position:relative;margin:auto;">
     <button onclick="closeFormModal()" style="position:absolute;top:10px;right:12px;background:rgba(0,0,0,0.12);border:none;border-radius:50%;width:30px;height:30px;font-size:1.1rem;cursor:pointer;color:#333;z-index:10;line-height:1;">✕</button>
 <!-- Header -->
   <div class="form-header">
