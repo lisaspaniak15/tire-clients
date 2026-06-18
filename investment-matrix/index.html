@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kati's Investment Matrix — Truth in Real Estate®</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy:  #14213d;
+      --cream: #faf9f6;
+      --teal:  #7a928d;
+      --gold:  #d4b07a;
+      --altbg: #f3f8fb;
+      --white: #ffffff;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--navy); }
+
+    /* NAV */
+    nav {
+      background: var(--white);
+      border-bottom: 1px solid #e8e2d9;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-brand { font-size: 0.95rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--navy); text-decoration: none; }
+    .nav-brand span { color: var(--gold); }
+    .nav-links { display: flex; gap: 1.5rem; align-items: center; }
+    .nav-links a { color: var(--teal); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--navy); }
+    .nav-cta { background: var(--navy); color: var(--white) !important; padding: 0.5rem 1.2rem; border-radius: 6px; }
+    .nav-cta:hover { background: #1c2e58 !important; color: var(--white) !important; }
+
+    /* HERO */
+    .hero {
+      background: var(--navy);
+      color: var(--white);
+      text-align: center;
+      padding: 5rem 2rem 4.5rem;
+    }
+    .hero-label {
+      display: inline-block;
+      background: rgba(212,176,122,0.15);
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.4rem 1.1rem;
+      border-radius: 100px;
+      margin-bottom: 1.75rem;
+    }
+    .hero h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); font-weight: 900; line-height: 1.1; max-width: 720px; margin: 0 auto 1.25rem; }
+    .hero h1 em { color: var(--gold); font-style: normal; }
+    .hero p { font-size: 1.1rem; color: #b8c5d0; max-width: 560px; margin: 0 auto 2.5rem; line-height: 1.75; }
+    .hero-cta {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--navy);
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 0.9rem 2.2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .hero-cta:hover { opacity: 0.88; }
+
+    section { padding: 4.5rem 2rem; }
+    .container { max-width: 960px; margin: 0 auto; }
+    .section-label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--teal); margin-bottom: 0.6rem; }
+    .section-heading { font-size: clamp(1.6rem, 3.5vw, 2.2rem); font-weight: 800; color: var(--navy); line-height: 1.2; margin-bottom: 1rem; }
+    .section-sub { font-size: 1.05rem; color: var(--teal); line-height: 1.7; max-width: 600px; }
+
+    /* FIVE CATEGORIES */
+    .categories { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; margin-top: 3rem; }
+    .cat-card {
+      background: var(--white);
+      border: 1px solid #e8e2d9;
+      border-radius: 12px;
+      padding: 1.75rem 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .cat-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+    }
+    .cat-card.c1::before { background: #c0392b; }
+    .cat-card.c2::before { background: #e67e22; }
+    .cat-card.c3::before { background: #f1c40f; }
+    .cat-card.c4::before { background: #27ae60; }
+    .cat-card.c5::before { background: var(--teal); }
+    .cat-num { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal); margin-bottom: 0.4rem; }
+    .cat-card h3 { font-size: 1.05rem; font-weight: 800; color: var(--navy); margin-bottom: 0.5rem; }
+    .cat-card p { font-size: 0.88rem; color: var(--teal); line-height: 1.65; }
+    .cat-badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      margin-bottom: 0.75rem;
+      letter-spacing: 0.04em;
+    }
+    .c1 .cat-badge { background: #fdf0ef; color: #c0392b; }
+    .c2 .cat-badge { background: #fef5ec; color: #e67e22; }
+    .c3 .cat-badge { background: #fffbeb; color: #b7941a; }
+    .c4 .cat-badge { background: #edfaf3; color: #1e8449; }
+    .c5 .cat-badge { background: #eef4f3; color: var(--teal); }
+
+    /* QUIZ */
+    #quiz-section { background: var(--altbg); }
+    .quiz-wrap {
+      background: var(--white);
+      border: 1px solid #e8e2d9;
+      border-radius: 16px;
+      padding: 3rem;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .quiz-intro { text-align: center; margin-bottom: 2.5rem; }
+    .quiz-intro h2 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; color: var(--navy); margin-bottom: 0.75rem; }
+    .quiz-intro p { font-size: 0.97rem; color: var(--teal); line-height: 1.7; max-width: 560px; margin: 0 auto; }
+
+    .quiz-group { margin-bottom: 2.5rem; }
+    .quiz-group-title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border-bottom: 1px solid #e8e2d9;
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .quiz-item { margin-bottom: 1.5rem; }
+    .quiz-item label { display: block; font-size: 0.93rem; font-weight: 600; color: var(--navy); margin-bottom: 0.6rem; }
+    .quiz-item label span { font-weight: 400; color: var(--teal); font-size: 0.85rem; }
+
+    .options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .option-btn {
+      border: 1.5px solid #d9d2c9;
+      background: var(--cream);
+      color: var(--navy);
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s;
+      font-family: 'Inter', sans-serif;
+    }
+    .option-btn:hover { border-color: var(--teal); background: #f0f6f5; }
+    .option-btn.selected {
+      border-color: var(--navy);
+      background: var(--navy);
+      color: var(--white);
+    }
+
+    .quiz-progress {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .progress-bar-wrap { flex: 1; background: #e8e2d9; border-radius: 100px; height: 6px; overflow: hidden; }
+    .progress-bar { height: 100%; background: var(--gold); border-radius: 100px; transition: width 0.3s ease; width: 0%; }
+    .progress-label { font-size: 0.82rem; color: var(--teal); font-weight: 500; white-space: nowrap; }
+
+    .quiz-submit-row { text-align: center; margin-top: 2rem; }
+    .quiz-submit {
+      background: var(--navy);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 0.9rem 2.5rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .quiz-submit:hover { opacity: 0.85; }
+    .quiz-submit:disabled { opacity: 0.4; cursor: not-allowed; }
+    .quiz-note { font-size: 0.82rem; color: var(--teal); margin-top: 0.75rem; }
+
+    /* LEAD CAPTURE GATE */
+    #lead-capture { display: none; }
+    .lead-capture-wrap {
+      background: var(--white);
+      border: 1px solid #e8e2d9;
+      border-radius: 16px;
+      padding: 3rem;
+      max-width: 560px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .lead-capture-wrap .lc-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+    .lead-capture-wrap h2 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 900; color: var(--navy); margin-bottom: 0.6rem; }
+    .lead-capture-wrap .lc-sub { font-size: 0.97rem; color: var(--teal); line-height: 1.7; margin-bottom: 2rem; }
+    .lc-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+    @media (max-width: 480px) { .lc-row { grid-template-columns: 1fr; } }
+    .lc-field { display: flex; flex-direction: column; gap: 0.4rem; text-align: left; }
+    .lc-field label { font-size: 0.82rem; font-weight: 600; color: var(--navy); }
+    .lc-field input {
+      border: 1.5px solid #d9d2c9;
+      background: var(--cream);
+      border-radius: 6px;
+      padding: 0.65rem 0.9rem;
+      font-size: 0.93rem;
+      font-family: 'Inter', sans-serif;
+      color: var(--navy);
+      transition: border-color 0.15s;
+    }
+    .lc-field input:focus { outline: none; border-color: var(--navy); }
+    .lc-terms {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      margin: 1.25rem 0 1.75rem;
+      text-align: left;
+    }
+    .lc-terms input[type="checkbox"] { margin-top: 3px; flex-shrink: 0; accent-color: var(--navy); width: 16px; height: 16px; cursor: pointer; }
+    .lc-terms span { font-size: 0.82rem; color: var(--teal); line-height: 1.6; }
+    .lc-terms a { color: var(--teal); text-decoration: underline; }
+    .lc-submit {
+      width: 100%;
+      background: var(--navy);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 0.9rem 2rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .lc-submit:hover { opacity: 0.85; }
+    .lc-submit:disabled { opacity: 0.4; cursor: not-allowed; }
+    .lc-error { font-size: 0.85rem; color: #c0392b; margin-top: 0.75rem; display: none; }
+
+    /* RESULTS */
+    #results { display: none; }
+    .result-card {
+      background: var(--white);
+      border: 1px solid #e8e2d9;
+      border-radius: 16px;
+      padding: 3rem;
+      max-width: 860px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .result-card .result-badge {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.4rem 1.1rem;
+      border-radius: 100px;
+      margin-bottom: 1.25rem;
+    }
+    .result-score-circle {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      border: 4px solid;
+    }
+    .result-score-circle .score-num { font-size: 2.2rem; font-weight: 900; line-height: 1; }
+    .result-score-circle .score-lbl { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.2rem; opacity: 0.7; }
+    .result-card h2 { font-size: clamp(1.6rem, 3vw, 2rem); font-weight: 900; color: var(--navy); margin-bottom: 0.75rem; }
+    .result-card .result-tagline { font-size: 1rem; color: var(--teal); line-height: 1.7; max-width: 560px; margin: 0 auto 2rem; }
+
+    .result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; text-align: left; margin-bottom: 2rem; }
+    @media (max-width: 600px) { .result-grid { grid-template-columns: 1fr; } }
+    .result-box {
+      background: var(--cream);
+      border: 1px solid #e8e2d9;
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+    }
+    .result-box h4 { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); margin-bottom: 0.6rem; }
+    .result-box ul { list-style: none; }
+    .result-box ul li { font-size: 0.9rem; color: var(--navy); padding: 0.3rem 0; display: flex; gap: 0.5rem; line-height: 1.5; }
+    .result-box ul li::before { content: '→'; color: var(--gold); flex-shrink: 0; }
+
+    .result-budget {
+      background: var(--navy);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      color: var(--white);
+      text-align: center;
+    }
+    .result-budget h4 { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem; }
+    .budget-examples { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
+    .budget-item { background: rgba(255,255,255,0.08); border-radius: 8px; padding: 0.75rem 1.25rem; }
+    .budget-item .bv { font-size: 0.78rem; color: #9eb4c0; margin-bottom: 0.2rem; }
+    .budget-item .br { font-size: 1.05rem; font-weight: 700; color: var(--white); }
+
+    .result-cta-section { border-top: 1px solid #e8e2d9; padding-top: 2rem; }
+    .result-cta-section p { font-size: 0.97rem; color: var(--teal); line-height: 1.7; max-width: 520px; margin: 0 auto 1.5rem; }
+    .btn-gold {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--navy);
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 0.9rem 2.2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+      margin: 0 0.5rem 0.75rem;
+    }
+    .btn-gold:hover { opacity: 0.88; }
+    .btn-outline {
+      display: inline-block;
+      border: 1.5px solid var(--navy);
+      color: var(--navy);
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 0.85rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.2s;
+      margin: 0 0.5rem 0.75rem;
+    }
+    .btn-outline:hover { background: var(--navy); color: var(--white); }
+    .retake-btn {
+      background: none;
+      border: none;
+      color: var(--teal);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem;
+      cursor: pointer;
+      text-decoration: underline;
+      display: block;
+      margin: 1rem auto 0;
+    }
+    .retake-btn:hover { color: var(--navy); }
+
+    /* WHY SECTION */
+    .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+    .why-card {
+      background: var(--white);
+      border: 1px solid #e8e2d9;
+      border-radius: 12px;
+      padding: 1.75rem 1.5rem;
+    }
+    .why-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+    .why-card h3 { font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 0.5rem; }
+    .why-card p { font-size: 0.88rem; color: var(--teal); line-height: 1.65; }
+
+    /* CTA BANNER */
+    .cta-banner {
+      background: var(--navy);
+      color: var(--white);
+      text-align: center;
+      padding: 5rem 2rem;
+    }
+    .cta-banner h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 900; margin-bottom: 1rem; }
+    .cta-banner h2 em { color: var(--gold); font-style: normal; }
+    .cta-banner p { color: #b8c5d0; font-size: 1.05rem; max-width: 500px; margin: 0 auto 2.5rem; line-height: 1.75; }
+
+    footer {
+      background: var(--white);
+      border-top: 1px solid #e8e2d9;
+      padding: 2rem;
+      text-align: center;
+    }
+    footer p { font-size: 0.82rem; color: var(--teal); }
+    footer a { color: var(--teal); text-decoration: none; }
+    footer a:hover { color: var(--navy); }
+
+    @media (max-width: 640px) {
+      .quiz-wrap { padding: 2rem 1.25rem; }
+      .result-card { padding: 2rem 1.25rem; }
+      nav { padding: 1rem; }
+      .nav-links { gap: 1rem; }
+    }
+  </style>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version="2.0";
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,"script",
+"https://connect.facebook.net/en_US/fbevents.js");
+fbq("init", "1189139200086784");
+fbq("track", "PageView");
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1189139200086784&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-brand">Truth in <span>Real Estate</span>®</a>
+  <div class="nav-links">
+    <a href="https://katispaniak.com/sellersplaybook">Seller's Playbook</a>
+    <a href="https://truthinrealestate.com" class="nav-cta">Find My Agent</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-label">Free Homeowner Tool</div>
+  <h1>Kati's <em>Investment Matrix</em></h1>
+  <p>Stop guessing which renovations are worth it. Take this 2-minute quiz and find out exactly which category your home falls into — and how much you should (or shouldn't) spend before selling.</p>
+  <a href="#quiz-section" class="hero-cta">Take the Free Quiz ↓</a>
+</div>
+
+<!-- THE 5 CATEGORIES -->
+<section>
+  <div class="container">
+    <div class="section-label">The Framework</div>
+    <h2 class="section-heading">5 Categories Every Home Falls Into</h2>
+    <p class="section-sub">I've watched homeowners flush thousands of dollars into the wrong upgrades. The Investment Matrix tells you which of these five categories your home is in — so you spend where it counts and skip what doesn't.</p>
+
+    <div class="categories">
+      <div class="cat-card c1">
+        <div class="cat-num">Category 1</div>
+        <span class="cat-badge">81–100 pts</span>
+        <h3>Restoration Required</h3>
+        <p>Aging systems, significant structural issues. Focus only on essential repairs and disclosure items. Your buyer is likely an investor — don't overspend on cosmetics.</p>
+      </div>
+      <div class="cat-card c2">
+        <div class="cat-num">Category 2</div>
+        <span class="cat-badge">61–80 pts</span>
+        <h3>Concealable Condition</h3>
+        <p>Outdated mechanicals with noticeable wear. Deep clean, minor repairs, and touch-ups only. Don't sink money into big updates that won't pay off.</p>
+      </div>
+      <div class="cat-card c3">
+        <div class="cat-num">Category 3</div>
+        <span class="cat-badge">41–60 pts</span>
+        <h3>Surface Shine</h3>
+        <p>Looks great on the surface but savvy buyers will scrutinize the fundamentals. Address deferred maintenance and stage well — but don't over-invest in trends.</p>
+      </div>
+      <div class="cat-card c4">
+        <div class="cat-num">Category 4</div>
+        <span class="cat-badge">31–40 pts</span>
+        <h3>Unpolished Potential</h3>
+        <p>Well-maintained mechanicals, dated aesthetics. My favorite category — small updates yield big returns. Kitchen/bath refreshes and curb appeal will pay off here.</p>
+      </div>
+      <div class="cat-card c5">
+        <div class="cat-num">Category 5</div>
+        <span class="cat-badge">20–30 pts</span>
+        <h3>Modern Move-In</h3>
+        <p>Updated, turnkey, and ready. Focus on maintenance, minor touch-ups, and killer listing photos. Buyers expect perfection — don't let deferred maintenance derail you.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUIZ -->
+<section id="quiz-section">
+  <div class="container">
+
+    <!-- QUIZ FORM -->
+    <div id="quiz-form-wrap">
+      <div class="quiz-wrap">
+        <div class="quiz-intro">
+          <h2>Score Your Home</h2>
+          <p>Rate each item based on its current age or condition. Add up your points at the end to reveal your category. This is the same scoring system I use with my own clients.</p>
+        </div>
+
+        <div class="quiz-progress">
+          <div class="progress-bar-wrap"><div class="progress-bar" id="progress-bar"></div></div>
+          <div class="progress-label"><span id="answered-count">0</span> / 20 answered</div>
+        </div>
+
+        <form id="quiz-form">
+
+          <!-- GROUP 1: MECHANICAL SYSTEMS -->
+          <div class="quiz-group">
+            <div class="quiz-group-title">Mechanical Systems</div>
+
+            <div class="quiz-item" data-key="furnace">
+              <label>Furnace <span>(select age)</span></label>
+              <div class="options">
+                <button type="button" class="option-btn" data-val="1">1–5 yrs / N/A</button>
+                <button type="button" class="option-btn" data-val="2">6–10 yrs</button>
+                <button type="button" class="option-btn" data-val="3">11–15 yrs</button>
+                <button type="button" class="option-btn" data-val="4">16–20 yrs</button>
+                <button type="button" class="option-btn" data-val="5">20+ yrs</button>
+              </div>
+            </div>
+
+            <div class="quiz-item" data-key="ac">
+              <label>A/C <span>(select age)</span></label>
+              <div class="options">
+                <button type="button" class="option-btn" data-val="1">1–5 yrs / N/A</button>
+                <button type="button" class="option-btn" data-val="2">6–10 yrs</button>
+                <button type="button" class="option-btn" data-val="3">11–15 yrs</button>
+                <button type="button" class="option-btn" data-val="4">16–20 yrs</button>
+                <button type="button" class="option-btn" data-val="5">20+ yrs</button>
+              </div>
+            </div>
+
+            <div class="quiz-item" data-key="roof">
+              <label>Roof <span>(select age)</span></label>
+              <div class="options">
+                <button type="button" class="option-btn" data-val="1">1–5 yrs</button>
+                <button type="button" class="option-btn" data-val="2">6–10 yrs</button>
+                <button type="button" class="option-btn" data-val="3">11–15 yrs</button>
+                <button type="button" class="option-btn" data-val="4">16–20 yrs</button>
+                <button type="button" class="option-btn" data-val="5">20+ yrs</button>
+              </div>
+            </div>
+
+            <div class="quiz-item" data-key="windows">
+              <label>Windows <span>(select age)</span></label>
+              <div class="options">
+                <button type="button" class="option-btn" data-val="1">1–5 yrs</button>
+                <button type="button" class="option-btn" data-val="2">6–10 yrs</button>
+                <button type="button" class="option-btn" data-val="3">11–15 yrs</button>
+                <button type="button" class="option-btn" data-val="4">16–20 yrs</button>
+                <button type="button" class="option-btn" data-val="5">20+ yrs</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- GROUP 2: INTERIOR -->
+          <div class="quiz-group">
+            <div class="quiz-group-title">Interior Finishes</div>
+
+            <div class="quiz-item" data-key="kitchen">
+              <label>Kitchen <span>(last remodel age)</span></label>
+              <div class="options">
+                <button type="button" class="option-btn" data-val="1">1–10 yrs</button>
+                <button type="button" class="option-btn" data-val="2">11–15 yrs</button>
+                <button type="button" class="option-btn" data-val="3">16–20 yrs</button>
+                <button type="button" class="option-btn" data-val="4">21–30 yrs</button>
+                <button type="button" class="option-btn" data-val="5">30+ yrs</button>
+              </div>
+            </div>
+
+            <div class="quiz-item" data-key="master-bath">
+              <label>Master Bathroom <span>(last remodel age)</span></label>
+              <div class="options">
+                <button type="button" class="option-btn" data-val="1">1–5 yrs</button>
+                <button type="button" class="option-btn" data-val="2">6–10 yrs</button>
+                <button type="button" class="option-btn" data-val="3">11–15 yrs</button>
+                <button type="button" class="option-btn" data-val="4">16–20 yrs</button>
+                <button type="button" class="option-btn" data-val="5">20+ yrs</button>
+              </div>
+            </div>
+
+            <div class="quiz-item" data-key="other-baths">
+              <label>Other Bathrooms <span>(last remodel age)</span></label>
+              <div class="options">
+                <button type="button" class="option-btn" data-val="1">1–5 yrs</button>
+                <button type="button" class="option-btn" data-val="2">6–10 yrs</button>
+                <button type="button" class="option-btn" data-val="3">11–15 yrs</button>
+                <button type="button" class="option-btn" data-val="4">16–20 yrs</button>
+                <button type="button" class="option-btn" data-val="5">20+ yrs</button>
+              </div>
+            </div>
+
+            <div class="quiz-item" data-key="paint">
+              <label>Interior Paint <span>(last painted)</span></label>
+              <div class="options">
+                <button type="button" class="option-btn" data-val="1">1–5 yrs</button>
+                <button type="button" class="option-btn" data-val="2">6–10 yrs</button>
+                <button type="button" class="option-btn" data-val="3">11–15 yrs</button>
+                <button type="button" class="option-btn" data-val="4">16–20 yrs</button>
+                <button type="button" class="option-btn" data-val="5">20+ yrs</button>
+              </div>
+            </div>
+
+            <div class="quiz-item" data-key="floors">
+              <label>Flooring Type <span>(primary floors)</span></label>
+              <div class="options">
+                <button type="button" class="option-btn" data-val="1">Hardwood</button>
+                <button type="button" class="option-btn" data-val="2">Luxury Vinyl Plank</button>
+                <button type="button" class="option-btn" data-val="3">Tile</button>
+                <button type="button" class="option-btn" data-val="4">Carpet</button>
+                <button type="button" class="option-btn" data-val="5">Vinyl / Linoleum</button>
+              </div>
+            </div>
+
+            <div class="quiz-item" data-key="furniture">
+              <label>Furniture &amp; Decor <span>(age / style)</span></label>
+              <div class="options">
+                <button type="button" class="option-btn" data-val="1">1–5 yrs — modern and cohesive</button>
+                <button type="button" class="option-btn" data-val="2">6–10 yrs</button>
+                <button type="button" class="option-btn" data-val="3">11–15 yrs</button>
+                <button type="button" class="option-btn" data-val="4">16–20 yrs</button>
+                <button type="button" class="option-btn" data-val="5">20+ yrs — heavily dated</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- GROUP 3: HOME PROFILE -->
+          <div class="quiz-group">
+            <div class="quiz-group-title">Home Profile</div>
+
+            <div class="quiz-item" data-key="age-home">
+              <label>Age of Home</label>
+              <div class="options">
+                <button type="button" class="option-btn" data-val="1">1–10 yrs</button>
+                <button type="button" class="option-btn" data-val="2">11–20 yrs</button>
+                <button type="button" class="option-btn" data-val="3">21–30 yrs</button>
+                <button type="button" class="option-btn" data-val="4">31–40 yrs</button>
+                <button type="button" class="option-btn" data-val="5">41+ yrs</button>
+              </div>
+            </div>
+
+            <div class="quiz-item" data-key="layout">
+              <label>Layout of Home</label>
+              <div class="options">
+                <button type="button" class="option-btn" data-val="1">Excellent — flows great</button>
+                <button type="button" class="option-btn" data-val="3">Good — functional</button>
+                <button type="button" class="option-btn" data-val="5">Poor — awkward or choppy</button>
+              </div>
+            </div>
+
+            <div class="quiz-item" data-key="location">
+              <label>Location / Street Appeal</label>
+              <div class="options">
+                <button type="button" class="option-btn" data-val="1">Excellent</button>
+                <button type="button" class="option-btn" data-val="3">Good</button>
+                <button type="button" class="option-btn" data-val="5">Poor</button>
+              </div>
+            </div>
+
+            <div class="quiz-item" data-key="outdoor">
+              <label>Outdoor Space</label>
+              <div class="options">
+                <button type="button" class="option-btn" data-val="1">Excellent</button>
+                <button type="button" class="option-btn" data-val="3">Some</button>
+                <button type="button" class="option-btn" data-val="5">None</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- GROUP 4: CONDITION & MAINTENANCE -->
+          <div class="quiz-group">
+            <div class="quiz-group-title">Condition &amp; Maintenance</div>
+
+            <div class="quiz-item" data-key="foundation">
+              <label>Foundation Condition</label>
+              <div class="options">
+                <button type="button" class="option-btn" data-val="1">Excellent — no known issues</button>
+                <button type="button" class="option-btn" data-val="3">Fine — minor concerns</button>
+                <button type="button" class="option-btn" data-val="5">Poor — significant issues</button>
+              </div>
+            </div>
+
+            <div class="quiz-item" data-key="cleaning">
+              <label>How often is the home deep cleaned?</label>
+              <div class="options">
+                <button type="button" class="option-btn" data-val="1">Weekly</button>
+                <button type="button" class="option-btn" data-val="3">Monthly</button>
+                <button type="button" class="option-btn" data-val="5">Infrequently</button>
+              </div>
+            </div>
+
+            <div class="quiz-item" data-key="deferred">
+              <label>Deferred Maintenance</label>
+              <div class="options">
+                <button type="button" class="option-btn" data-val="1">None — everything is addressed</button>
+                <button type="button" class="option-btn" data-val="3">Some — a few items lingering</button>
+                <button type="button" class="option-btn" data-val="5">A lot — backlog of repairs</button>
+              </div>
+            </div>
+
+            <div class="quiz-item" data-key="landscaping">
+              <label>Landscaping</label>
+              <div class="options">
+                <button type="button" class="option-btn" data-val="1">Excellent</button>
+                <button type="button" class="option-btn" data-val="3">Some</button>
+                <button type="button" class="option-btn" data-val="5">None / Neglected</button>
+              </div>
+            </div>
+
+            <div class="quiz-item" data-key="dealbreaker">
+              <label>Is there an obvious reason a buyer wouldn't purchase?</label>
+              <div class="options">
+                <button type="button" class="option-btn" data-val="1">No — it's perfect</button>
+                <button type="button" class="option-btn" data-val="3">Maybe — not sure</button>
+                <button type="button" class="option-btn" data-val="5">Yes — there's a real issue</button>
+              </div>
+            </div>
+
+            <div class="quiz-item" data-key="sellers-market">
+              <label>Is it currently a seller's market in your area?</label>
+              <div class="options">
+                <button type="button" class="option-btn" data-val="1">Yes — strong seller's market</button>
+                <button type="button" class="option-btn" data-val="3">Unsure</button>
+                <button type="button" class="option-btn" data-val="5">No — buyer's market</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="quiz-submit-row">
+            <button type="button" class="quiz-submit" id="submit-btn" disabled onclick="showResults()">
+              Calculate My Score →
+            </button>
+            <p class="quiz-note" id="quiz-note-text">Answer all 20 questions to see your results.</p>
+          </div>
+
+        </form>
+      </div>
+    </div>
+
+    <!-- LEAD CAPTURE GATE -->
+    <div id="lead-capture">
+      <div class="lead-capture-wrap">
+        <div class="lc-icon">🏠</div>
+        <h2>Your Score Is Ready</h2>
+        <p class="lc-sub">Enter your info below to see your Investment Matrix category and personalized recommendations.</p>
+        <div class="lc-row">
+          <div class="lc-field">
+            <label for="lc-first">First Name *</label>
+            <input type="text" id="lc-first" placeholder="Jane" autocomplete="given-name" />
+          </div>
+          <div class="lc-field">
+            <label for="lc-last">Last Name *</label>
+            <input type="text" id="lc-last" placeholder="Smith" autocomplete="family-name" />
+          </div>
+        </div>
+        <div class="lc-row">
+          <div class="lc-field">
+            <label for="lc-phone">Phone *</label>
+            <input type="tel" id="lc-phone" placeholder="(312) 555-0100" autocomplete="tel" />
+          </div>
+          <div class="lc-field">
+            <label for="lc-email">Email *</label>
+            <input type="email" id="lc-email" placeholder="jane@example.com" autocomplete="email" />
+          </div>
+        </div>
+        <div class="lc-terms">
+          <input type="checkbox" id="lc-agree" />
+          <span>I agree to be contacted by Truth in Real Estate® regarding my home sale. View our <a href="https://katispaniak.com/privacypolicy">Privacy Policy</a>.</span>
+        </div>
+        <button class="lc-submit" id="lc-submit-btn" onclick="submitLeadCapture()">See My Results →</button>
+        <p class="lc-error" id="lc-error"></p>
+      </div>
+    </div>
+
+    <!-- RESULTS -->
+    <div id="results">
+      <div class="result-card">
+        <div class="result-badge" id="result-badge"></div>
+        <div class="result-score-circle" id="result-circle">
+          <div class="score-num" id="result-score-num"></div>
+          <div class="score-lbl">Your Score</div>
+        </div>
+        <h2 id="result-category-name"></h2>
+        <p class="result-tagline" id="result-tagline"></p>
+
+        <div class="result-budget" id="result-budget-section">
+          <h4>Estimated Pre-Sale Budget</h4>
+          <div class="budget-examples" id="budget-examples"></div>
+        </div>
+
+        <div class="result-grid">
+          <div class="result-box">
+            <h4>Focus On</h4>
+            <ul id="result-focus"></ul>
+          </div>
+          <div class="result-box">
+            <h4>Avoid</h4>
+            <ul id="result-avoid"></ul>
+          </div>
+        </div>
+
+        <div class="result-cta-section">
+          <p>This score is a starting point — not the final word. To know exactly what to spend in <em>your specific neighborhood</em>, you need hyper-local data. That's what a TruthCertified™ Agent provides, free of charge.</p>
+          <a href="https://truthinrealestate.com" class="btn-gold">Request My Free Agent Introduction</a>
+          <a href="https://katispaniak.com/sellersplaybook" class="btn-outline">Read the Seller's Playbook</a>
+          <button class="retake-btn" onclick="retakeQuiz()">← Retake the quiz</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- WHY THIS MATTERS -->
+<section>
+  <div class="container">
+    <div class="section-label">Why It Matters</div>
+    <h2 class="section-heading">The Cost of Guessing</h2>
+    <p class="section-sub">The fastest way to lose equity is to spend $50,000 on a kitchen in a neighborhood where the ceiling price limits your return to $20,000. This matrix exists to stop that.</p>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">🏚</div>
+        <h3>Same Commission, Different Outcome</h3>
+        <p>The cost of a bad agent and a great agent is often identical. Bad advice, not a bad market, is why most sellers leave money on the table.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">📍</div>
+        <h3>Micro-Market, Not Macro Data</h3>
+        <p>Zillow gives you city averages. A renovation that pays off in the suburbs might lose you money on your specific street. Local data is everything.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">⚠️</div>
+        <h3>The Over-Improvement Trap</h3>
+        <p>Every neighborhood has a ceiling price. Improving past it doesn't increase your sale price — it just reduces your net. This matrix shows you exactly where to stop.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">✅</div>
+        <h3>Every Home Will Sell</h3>
+        <p>The question isn't whether your home will sell — it will. The question is how much you should invest to maximize what you walk away with at closing.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOTTOM CTA -->
+<div class="cta-banner">
+  <div class="container">
+    <h2>Don't Guess. Get the <em>Hyper-Local</em> Numbers.</h2>
+    <p>I have a curated network of Top 1% agents who will pull the specific numbers for your neighborhood — free of charge, no obligation to list.</p>
+    <a href="https://truthinrealestate.com" class="hero-cta">Request My TruthCertified™ Agent</a>
+  </div>
+</div>
+
+<footer>
+  <p>© 2025 Kati Spaniak — Truth in Real Estate® &nbsp;|&nbsp; <a href="https://katispaniak.com/privacypolicy">Privacy Policy</a> &nbsp;|&nbsp; <a href="https://truthinrealestate.com">truthinrealestate.com</a></p>
+</footer>
+
+<script>
+  const TOTAL_QUESTIONS = 20;
+  const answers = {};
+
+  const RESULTS = {
+    modern: {
+      range: [20, 30],
+      name: 'Modern Move-In',
+      badgeColor: '#eef4f3',
+      badgeText: '#4a8a7e',
+      circleColor: '#7a928d',
+      tagline: "Your home is updated, turnkey, and ready to impress. Buyers will expect near-perfection — your job now is to make sure no deferred maintenance slips through and your listing photos are outstanding.",
+      budgetPct: 'Up to 5%',
+      focus: ['Maintenance and minor touch-ups', 'High-quality listing photography', 'Staging with accessories', 'Ensure all systems are in excellent condition'],
+      avoid: ['Over-renovating — you\'re already there', 'Any deferred maintenance going unchecked', 'Skimping on professional photos'],
+      budgets: [
+        { val: '$300K', range: 'Up to $15,000' },
+        { val: '$500K', range: 'Up to $25,000' },
+        { val: '$800K', range: 'Up to $40,000' },
+      ]
+    },
+    unpolished: {
+      range: [31, 40],
+      name: 'Unpolished Potential',
+      badgeColor: '#edfaf3',
+      badgeText: '#1e8449',
+      circleColor: '#27ae60',
+      tagline: "My favorite category. Your mechanicals are solid — you just need a cosmetic refresh. Small, targeted updates here can yield significant returns. Buyers will see a well-maintained home that's ready to make their own.",
+      budgetPct: '5–10%',
+      focus: ['Kitchen and bathroom minimal updates', 'Staging throughout', 'Landscaping and curb appeal', 'Fresh paint in neutral tones'],
+      avoid: ['Extensive full remodels', 'Chasing trends — buyers here want to personalize', 'Spending on systems that are already solid'],
+      budgets: [
+        { val: '$300K', range: '$15,000–$30,000' },
+        { val: '$500K', range: '$25,000–$50,000' },
+        { val: '$800K', range: '$40,000–$80,000' },
+      ]
+    },
+    surface: {
+      range: [41, 60],
+      name: 'Surface Shine',
+      badgeColor: '#fffbeb',
+      badgeText: '#b7941a',
+      circleColor: '#f1c40f',
+      tagline: "Your home looks good on the surface, but savvy buyers will scrutinize what's underneath at inspection. Address deferred maintenance before you list — don't let cosmetic appeal mask functional issues that will surface in negotiations.",
+      budgetPct: '3–7%',
+      focus: ['Address all deferred maintenance', 'Staging to highlight best features', 'Cosmetic updates where needed', 'Improve overall presentation and appeal'],
+      avoid: ['Over-investing in trendy updates', 'Ignoring mechanical or structural issues', 'Expecting to negotiate away inspection findings'],
+      budgets: [
+        { val: '$300K', range: '$9,000–$21,000' },
+        { val: '$500K', range: '$15,000–$35,000' },
+        { val: '$800K', range: '$24,000–$56,000' },
+      ]
+    },
+    concealable: {
+      range: [61, 80],
+      name: 'Concealable Condition',
+      badgeColor: '#fef5ec',
+      badgeText: '#e67e22',
+      circleColor: '#e67e22',
+      tagline: "You have visible issues and outdated mechanicals. The goal is targeted, modest improvements to enhance marketability — not a full overhaul. A deep clean, fresh paint, and minor repairs go a long way. Know your ceiling.",
+      budgetPct: '2–5%',
+      focus: ['Minor cosmetic updates — fresh paint, new hardware', 'Repair obvious visible issues', 'Deep cleaning and decluttering', 'Honest pricing that reflects condition'],
+      avoid: ['Major renovations — buyers here want to update themselves', 'Overpaying for upgrades you won\'t recoup', 'Hiding issues that will surface on inspection'],
+      budgets: [
+        { val: '$300K', range: '$6,000–$15,000' },
+        { val: '$500K', range: '$10,000–$25,000' },
+        { val: '$800K', range: '$16,000–$40,000' },
+      ]
+    },
+    restoration: {
+      range: [81, 100],
+      name: 'Restoration Required',
+      badgeColor: '#fdf0ef',
+      badgeText: '#c0392b',
+      circleColor: '#c0392b',
+      tagline: "Your home needs significant work. Don't burn equity on cosmetics — focus only on essential repairs and safety items required for disclosure. Your likely buyer is an investor who's priced in the renovation. Price correctly and save your money.",
+      budgetPct: '1–3%',
+      focus: ['Essential repairs for disclosure items only', 'Safety and functionality improvements', 'Deep cleaning and decluttering', 'Accurate, honest pricing'],
+      avoid: ['Any cosmetic renovations — investors don\'t care', 'Over-spending to compensate for condition', 'Emotional attachment to a higher list price'],
+      budgets: [
+        { val: '$300K', range: '$3,000–$9,000' },
+        { val: '$500K', range: '$5,000–$15,000' },
+        { val: '$800K', range: '$8,000–$24,000' },
+      ]
+    }
+  };
+
+  function getCategory(score) {
+    if (score <= 30) return RESULTS.modern;
+    if (score <= 40) return RESULTS.unpolished;
+    if (score <= 60) return RESULTS.surface;
+    if (score <= 80) return RESULTS.concealable;
+    return RESULTS.restoration;
+  }
+
+  // Handle option button clicks
+  document.querySelectorAll('.quiz-item').forEach(item => {
+    const key = item.dataset.key;
+    item.querySelectorAll('.option-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Deselect siblings
+        item.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        answers[key] = parseInt(btn.dataset.val, 10);
+        updateProgress();
+      });
+    });
+  });
+
+  function updateProgress() {
+    const count = Object.keys(answers).length;
+    document.getElementById('answered-count').textContent = count;
+    document.getElementById('progress-bar').style.width = (count / TOTAL_QUESTIONS * 100) + '%';
+    const submitBtn = document.getElementById('submit-btn');
+    const noteEl = document.getElementById('quiz-note-text');
+    if (count === TOTAL_QUESTIONS) {
+      submitBtn.disabled = false;
+      noteEl.textContent = "You're ready! Click to see your results.";
+    } else {
+      submitBtn.disabled = true;
+      noteEl.textContent = `Answer all 20 questions to see your results. (${TOTAL_QUESTIONS - count} remaining)`;
+    }
+  }
+
+  let pendingScore = null;
+  let pendingCat = null;
+
+  function showResults() {
+    const score = Object.values(answers).reduce((a, b) => a + b, 0);
+    const cat = getCategory(score);
+
+    // Store for use after lead capture
+    pendingScore = score;
+    pendingCat = cat;
+
+    // Show lead capture gate instead of results
+    document.getElementById('quiz-form-wrap').style.display = 'none';
+    document.getElementById('lead-capture').style.display = 'block';
+    document.getElementById('lead-capture').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function renderResults(score, cat) {
+    // Badge
+    const badge = document.getElementById('result-badge');
+    badge.textContent = cat.name;
+    badge.style.background = cat.badgeColor;
+    badge.style.color = cat.badgeText;
+
+    // Score circle
+    const circle = document.getElementById('result-circle');
+    circle.style.borderColor = cat.circleColor;
+    circle.style.color = cat.circleColor;
+    document.getElementById('result-score-num').textContent = score;
+
+    // Text
+    document.getElementById('result-category-name').textContent = cat.name;
+    document.getElementById('result-tagline').textContent = cat.tagline;
+
+    // Budget
+    const budgetExamples = document.getElementById('budget-examples');
+    budgetExamples.innerHTML = cat.budgets.map(b =>
+      `<div class="budget-item"><div class="bv">${b.val} home</div><div class="br">${b.range}</div></div>`
+    ).join('');
+
+    // Focus / Avoid
+    document.getElementById('result-focus').innerHTML = cat.focus.map(f => `<li>${f}</li>`).join('');
+    document.getElementById('result-avoid').innerHTML = cat.avoid.map(a => `<li>${a}</li>`).join('');
+
+    // Show results
+    document.getElementById('lead-capture').style.display = 'none';
+    document.getElementById('results').style.display = 'block';
+    document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  async function submitLeadCapture() {
+    const first_name = document.getElementById('lc-first').value.trim();
+    const last_name  = document.getElementById('lc-last').value.trim();
+    const phone      = document.getElementById('lc-phone').value.trim();
+    const email      = document.getElementById('lc-email').value.trim();
+    const agreed     = document.getElementById('lc-agree').checked;
+    const errorEl    = document.getElementById('lc-error');
+    const submitBtn  = document.getElementById('lc-submit-btn');
+
+    errorEl.style.display = 'none';
+
+    if (!first_name || !last_name || !phone || !email) {
+      errorEl.textContent = 'Please fill in all fields.';
+      errorEl.style.display = 'block';
+      return;
+    }
+    if (!agreed) {
+      errorEl.textContent = 'Please agree to the terms to continue.';
+      errorEl.style.display = 'block';
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Saving…';
+
+    try {
+      const res = await fetch(
+        'https://lgsutpvfhsumaawrbhms.supabase.co/functions/v1/submit-quiz-lead',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxnc3V0cHZmaHN1bWFhd3JiaG1zIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0NzA1ODYsImV4cCI6MjA5MzA0NjU4Nn0.upb76euLJMsFx4W5MZ2nkq5sa0IREf-Luip2JGDAjFk',
+          },
+          body: JSON.stringify({
+            first_name,
+            last_name,
+            phone,
+            email,
+            score: pendingScore,
+            category: pendingCat ? pendingCat.name : null,
+          }),
+        }
+      );
+
+      if (!res.ok) throw new Error('Submission failed');
+
+      renderResults(pendingScore, pendingCat);
+    } catch (err) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'See My Results →';
+      errorEl.textContent = 'Something went wrong. Please try again.';
+      errorEl.style.display = 'block';
+    }
+  }
+
+  function retakeQuiz() {
+    // Reset state
+    Object.keys(answers).forEach(k => delete answers[k]);
+    document.querySelectorAll('.option-btn.selected').forEach(b => b.classList.remove('selected'));
+    updateProgress();
+    document.getElementById('results').style.display = 'none';
+    document.getElementById('quiz-form-wrap').style.display = 'block';
+    document.getElementById('quiz-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+</script>
+
+</body>
+</html>
