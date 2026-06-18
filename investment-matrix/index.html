@@ -748,11 +748,7 @@ src="https://www.facebook.com/tr?id=1189139200086784&ev=PageView&noscript=1"
             <input type="text" id="lc-last" placeholder="Smith" autocomplete="family-name" />
           </div>
         </div>
-        <div class="lc-row">
-          <div class="lc-field">
-            <label for="lc-phone">Phone *</label>
-            <input type="tel" id="lc-phone" placeholder="(312) 555-0100" autocomplete="tel" />
-          </div>
+        <div class="lc-row" style="grid-template-columns: 1fr;">
           <div class="lc-field">
             <label for="lc-email">Email *</label>
             <input type="email" id="lc-email" placeholder="jane@example.com" autocomplete="email" />
@@ -1033,7 +1029,6 @@ src="https://www.facebook.com/tr?id=1189139200086784&ev=PageView&noscript=1"
   async function submitLeadCapture() {
     const first_name = document.getElementById('lc-first').value.trim();
     const last_name  = document.getElementById('lc-last').value.trim();
-    const phone      = document.getElementById('lc-phone').value.trim();
     const email      = document.getElementById('lc-email').value.trim();
     const agreed     = document.getElementById('lc-agree').checked;
     const errorEl    = document.getElementById('lc-error');
@@ -1041,7 +1036,7 @@ src="https://www.facebook.com/tr?id=1189139200086784&ev=PageView&noscript=1"
 
     errorEl.style.display = 'none';
 
-    if (!first_name || !last_name || !phone || !email) {
+    if (!first_name || !last_name || !email) {
       errorEl.textContent = 'Please fill in all fields.';
       errorEl.style.display = 'block';
       return;
@@ -1067,7 +1062,6 @@ src="https://www.facebook.com/tr?id=1189139200086784&ev=PageView&noscript=1"
           body: JSON.stringify({
             first_name,
             last_name,
-            phone,
             email,
             score: pendingScore,
             category: pendingCat ? pendingCat.name : null,
