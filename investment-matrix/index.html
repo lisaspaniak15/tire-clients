@@ -988,7 +988,10 @@ src="https://www.facebook.com/tr?id=1189139200086784&ev=PageView&noscript=1"
     // Show lead capture gate instead of results
     document.getElementById('quiz-form-wrap').style.display = 'none';
     document.getElementById('lead-capture').style.display = 'block';
-    document.getElementById('lead-capture').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const lcEl = document.getElementById('lead-capture');
+    const navHeight = document.querySelector('nav').offsetHeight;
+    const top = lcEl.getBoundingClientRect().top + window.scrollY - navHeight - 32;
+    window.scrollTo({ top, behavior: 'smooth' });
   }
 
   function renderResults(score, cat) {
@@ -1021,7 +1024,10 @@ src="https://www.facebook.com/tr?id=1189139200086784&ev=PageView&noscript=1"
     // Show results
     document.getElementById('lead-capture').style.display = 'none';
     document.getElementById('results').style.display = 'block';
-    document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const resultsEl = document.getElementById('results');
+    const navH = document.querySelector('nav').offsetHeight;
+    const resultsTop = resultsEl.getBoundingClientRect().top + window.scrollY - navH - 32;
+    window.scrollTo({ top: resultsTop, behavior: 'smooth' });
   }
 
   async function submitLeadCapture() {
