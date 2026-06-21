@@ -123,6 +123,15 @@ T&C consent checkbox is required — form will not submit without it.
 
 ---
 
+## Machine Setup
+
+- **Desktop (main):** Lisa's primary dev machine. Has full credentials and `flyctl` authenticated. Use for deployments.
+- **Laptop (secondary):** Being brought to full parity. If `flyctl` isn't authenticated, note the task and deploy from the desktop.
+
+**How to tell which machine you're on:** If `flyctl` isn't authenticated, you're on the laptop.
+
+---
+
 ## Session Update Rule
 
 At the end of every session, update this CLAUDE.md to reflect any significant changes made (new features, files, deployment changes, process changes).
